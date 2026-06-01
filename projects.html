@@ -13,11 +13,11 @@
 
     :root {
       --ink:  #111110;
-      --mid:  #737370;
+      --mid:  #4a4a47;
       --dim:  #b8b8b4;
       --line: #e8e8e4;
       --bg:   #ffffff;
-      --bg2:#f7f7f5;--accent:#e8600a;
+      --bg2:#f7f7f5;--accent:#c4500a;
     }
 
     html { scroll-behavior: smooth; }
@@ -178,7 +178,10 @@
       margin-bottom: 10px;
       transition: color .15s;
     }
-    .proj-item:hover .proj-title { color: var(--mid); }
+    .proj-item:hover { background: var(--bg2); }
+    .proj-item:hover .proj-title { color: var(--accent); }
+    .proj-item:hover .proj-n { color: var(--accent); }
+    .proj-item:hover .proj-outcome { border-left-color: var(--accent); }
 
     .proj-desc {
       font-size: 13.5px; font-weight: 300;
@@ -360,8 +363,8 @@
         <span class="proj-status"><span class="s-dot"></span>Complete</span>
       </div>
       <h2 class="proj-title">Customer Churn Prediction</h2>
-      <p class="proj-desc">Full churn pipeline on IBM Telco data — class-imbalance handling with SMOTE, XGBoost modelling, and a SHAP explainability layer translating predictions into actionable customer segments.</p>
-      <div class="proj-outcome"><strong>Outcome —</strong> Top 3 churn drivers identified. Targeting the highest-risk 20% with a retention offer projected to reduce annual churn by 22%.</div>
+      <p class="proj-desc">End-to-end churn pipeline on IBM Telco data (7,043 customers, 26.5% churn rate) — SMOTE imbalance handling, XGBoost modelling, and a SHAP explainability layer that translates each prediction into a specific driver so the retention team knows exactly what to target.</p>
+      <div class="proj-outcome"><strong>Outcome —</strong> XGBoost achieved AUC-ROC 0.837 and 76% churn recall vs. 63% for the logistic baseline. Contract type (SHAP 0.596), tenure (0.515), and fibre internet (0.406) were the top three drivers. Targeting the highest-risk 20% with a $10/month retention offer is projected to generate ~$52K net benefit annually — a 7.4× ROI.</div>
       <div class="proj-footer">
         <div class="proj-tools">
           <span class="t-chip">Python</span><span class="t-chip">XGBoost</span>

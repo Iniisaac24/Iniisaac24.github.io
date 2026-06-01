@@ -11,8 +11,8 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --ink: #111110; --mid: #737370; --dim: #b8b8b4;
-      --line: #e8e8e4; --bg: #ffffff; --bg2:#f7f7f5;--accent:#e8600a;
+      --ink: #111110; --mid: #4a4a47; --dim: #b8b8b4;
+      --line: #e8e8e4; --bg: #ffffff; --bg2:#f7f7f5;--accent:#c4500a;
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
@@ -135,7 +135,7 @@
   <div class="meta-row">
     <div class="meta-item"><p class="meta-label">Dataset</p><p class="meta-value">IBM Telco Churn — 7,043 customers</p></div>
     <div class="meta-item"><p class="meta-label">Model</p><p class="meta-value">XGBoost + SHAP</p></div>
-    <div class="meta-item"><p class="meta-label">Best AUC-ROC</p><p class="meta-value">0.847</p></div>
+    <div class="meta-item"><p class="meta-label">AUC-ROC / Recall</p><p class="meta-value">0.837 &nbsp;·&nbsp; 76% churn caught</p></div>
     <div class="meta-item"><p class="meta-label">Code</p><p class="meta-value"><a href="https://github.com/Iniisaac24/churn-analysis" target="_blank" rel="noopener noreferrer" class="meta-link">GitHub ↗</a> &nbsp;·&nbsp; <a href="https://github.com/Iniisaac24/churn-analysis/blob/main/churn_analysis.ipynb" target="_blank" rel="noopener noreferrer" class="meta-link">Notebook ↗</a></p></div>
   </div>
 </header>
@@ -162,7 +162,7 @@
       <div class="step"><span class="step-n">02</span><div><p class="step-title">Exploratory analysis</p><p class="step-desc">Churn rate broken down by contract type, payment method, internet service, and tenure band. The single biggest signal jumped out immediately: month-to-month customers churn at <strong>42%</strong> vs. 11% for one-year and 3% for two-year contracts.</p></div></div>
       <div class="step"><span class="step-n">03</span><div><p class="step-title">Feature engineering</p><p class="step-desc">Created <code>tenure_band</code>, <code>avg_monthly_charge</code> (total charges ÷ tenure), <code>service_count</code> (sum of active add-ons), and a <code>high_value</code> flag for customers in the top quartile of monthly spend.</p></div></div>
       <div class="step"><span class="step-n">04</span><div><p class="step-title">Class imbalance handling</p><p class="step-desc">Churn is ~26% of the dataset — imbalanced but not severely. Used SMOTE on the training set only (never on test) to oversample the minority class. Also tested <code>scale_pos_weight</code> in XGBoost directly.</p></div></div>
-      <div class="step"><span class="step-n">05</span><div><p class="step-title">Modelling</p><p class="step-desc">Baseline Logistic Regression (AUC 0.841) then XGBoost with 300 estimators, depth 5, learning rate 0.05 (AUC 0.847). Evaluated on AUC-ROC and Precision-Recall — not accuracy, which is misleading on imbalanced data.</p></div></div>
+      <div class="step"><span class="step-n">05</span><div><p class="step-title">Modelling</p><p class="step-desc">Baseline Logistic Regression (AUC-ROC 0.815, churn recall 63%). XGBoost with 300 estimators, max depth 5, learning rate 0.05 improved both: <strong>AUC-ROC 0.837, churn recall 76%</strong> — catching 13% more at-risk customers than the baseline. Evaluated on AUC-ROC and Precision-Recall throughout, not accuracy, which flatters any model on imbalanced data.</p></div></div>
       <div class="step"><span class="step-n">06</span><div><p class="step-title">SHAP explainability</p><p class="step-desc">TreeExplainer applied to the XGBoost model. Summary plot reveals the top 3 global drivers. Waterfall plots generated for individual high-risk customers so the retention team understands <em>why</em> each person is flagged.</p></div></div>
     </div>
   </div>
@@ -220,9 +220,9 @@ print(f"Net benefit: ${net_benefit:,.0f}  |  ROI: {net_benefit/(len(high_risk)*o
     <p class="section-label">Findings</p>
     <h2>What drives churn — and what to do about it</h2>
     <div class="findings">
-      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Contract type is the dominant signal.</strong> Month-to-month customers churn at 42% — 4× the rate of annual contracts. The single highest-ROI retention lever is migrating at-risk short-term customers to a subsidised annual plan.</p></div>
-      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Tenure is a strong protective factor.</strong> Median tenure for churned customers is 10 months vs. 38 months for retained. The first 12 months is the highest-risk window — this is where onboarding investment pays off most.</p></div>
-      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Monthly charges correlate with churn but in a nuanced way.</strong> High-charge customers churn more, but among annual-contract holders, high charges correlate with <em>lower</em> churn — they've committed and derive value. The interaction matters.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Contract type is the single most powerful signal (SHAP: 0.596).</strong> Month-to-month customers churn at 42.7% vs. 2.8% for two-year contracts — a <strong>15× gap</strong>. The highest-ROI retention lever is migrating at-risk monthly customers to a subsidised annual plan before they reach 12 months of tenure.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Tenure is a strong protective factor (SHAP: 0.515).</strong> Median tenure for churned customers is 10 months vs. 38 months for retained. Customers who survive the first 12 months churn at half the rate of new arrivals — onboarding investment in months 1–6 produces the highest long-term retention ROI.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Fibre optic internet service is a risk amplifier (SHAP: 0.406).</strong> Fibre customers pay significantly more (mean $74.44/month vs. $61.27 for retained customers overall) and have higher expectations. Among high-charge, month-to-month fibre customers, churn exceeds 60% — this is the portfolio's highest-risk segment.</p></div>
       <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Electronic check payers churn at 45%</strong> — nearly double credit card payers. This may indicate payment friction or lower engagement. Nudging electronic check customers to auto-pay could reduce churn passively.</p></div>
       <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Model ROI: targeting the top 20% highest-risk customers with a $10 monthly discount</strong> is projected to retain ~247 customers and generate a net benefit of ~$52,000 annually — a 7.4× return on campaign cost.</p></div>
     </div>

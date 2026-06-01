@@ -13,12 +13,12 @@
 
     :root {
       --ink:    #111110;
-      --mid:    #737370;
+      --mid:    #4a4a47;
       --dim:    #b8b8b4;
       --line:   #e8e8e4;
       --bg:     #ffffff;
       --bg2:    #f7f7f5;
-      --accent: #e8600a;
+      --accent: #c4500a;
     }
 
     html { scroll-behavior: smooth; }
@@ -50,7 +50,7 @@
 
     .nav-logo {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: -.01em;
       text-decoration: none;
       color: var(--ink);
@@ -63,7 +63,7 @@
     }
     .nav-links a {
       font-size: 13.5px;
-      font-weight: 400;
+      font-weight: 500;
       color: var(--mid);
       text-decoration: none;
       transition: color .15s;
@@ -72,7 +72,7 @@
 
     .nav-resume {
       font-size: 13px;
-      font-weight: 400;
+      font-weight: 500;
       color: var(--mid);
       text-decoration: none;
       border-bottom: 1px solid var(--line);
@@ -222,7 +222,9 @@
     }
     .proj-row:first-child { border-top: 1px solid var(--line); }
 
-    .proj-row:hover .proj-row-title { color: var(--mid); }
+    .proj-row:hover { background: var(--bg2); }
+    .proj-row:hover .proj-row-title { color: var(--accent); }
+    .proj-row:hover .proj-n { color: var(--accent); }
 
     .proj-n {
       font-size: 11.5px;
@@ -457,7 +459,7 @@
       <div class="proj-row-body">
         <p class="proj-row-domain">Telecom · Predictive Analytics</p>
         <p class="proj-row-title">Customer Churn Prediction</p>
-        <p class="proj-row-desc">XGBoost model identifying at-risk customers — retention campaign projected to cut annual churn by 22%.</p>
+        <p class="proj-row-desc">XGBoost (AUC 0.84, 76% recall) identifying at-risk customers across 7,043 records — top drivers: contract type, tenure, and service tier.</p>
       </div>
       <div class="proj-row-tools">
         <span class="t-chip">Python</span>
@@ -588,8 +590,8 @@
 
   <div class="stats-row">
     <div class="stat"><p class="stat-n">8</p><p class="stat-l">Projects</p></div>
-    <div class="stat"><p class="stat-n">5+</p><p class="stat-l">Industries</p></div>
-    <div class="stat"><p class="stat-n">6</p><p class="stat-l">Tools</p></div>
+    <div class="stat"><p class="stat-n">6</p><p class="stat-l">Industries</p></div>
+    <div class="stat"><p class="stat-n">10+</p><p class="stat-l">Tools &amp; Libraries</p></div>
   </div>
 </div>
 
