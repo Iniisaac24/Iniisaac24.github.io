@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Data analytics projects — SQL, Python, Tableau" />
   <title>Projects — Your Name</title>
@@ -294,6 +295,23 @@
       .proj-footer { flex-direction: column; align-items: flex-start; gap: 14px; }
       footer { flex-direction: column; gap: 12px; text-align: center; }
     }
+
+    /* ── DARK MODE ───────────────────────────────── */
+    html[data-theme="dark"] {
+      --ink: #f0ede4; --mid: #9a9790; --dim: #5c5a54;
+      --line: #2c2b26; --bg: #141412; --bg2: #1e1d1a; --accent: #f26419;
+    }
+    html[data-theme="dark"] nav { background: rgba(20,20,18,.92); }
+    .nav-right { display:flex; align-items:center; gap:16px; }
+    .theme-toggle {
+      background:none; border:none; cursor:pointer; color:var(--mid);
+      padding:2px; display:flex; align-items:center; transition:color .15s;
+    }
+    .theme-toggle:hover { color:var(--ink); }
+    .icon-sun  { display:none; }
+    .icon-moon { display:block; }
+    html[data-theme="dark"] .icon-sun  { display:block; }
+    html[data-theme="dark"] .icon-moon { display:none; }
   </style>
 </head>
 <body>
@@ -307,7 +325,10 @@
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="assets/resume.pdf" class="nav-resume" target="_blank">Resume ↗</a>
+  <div class="nav-right">
+    <a href="assets/resume.pdf" class="nav-resume" target="_blank">Resume ↗</a>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+  </div>
 </nav>
 
 <!-- HEADER -->
@@ -347,8 +368,8 @@
           <span class="t-chip">SHAP</span><span class="t-chip">scikit-learn</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/yourusername/churn-analysis" class="p-link primary" target="_blank">GitHub ↗</a>
-          <a href="https://nbviewer.org" class="p-link" target="_blank">Notebook</a>
+          <a href="https://github.com/Iniisaac24/churn-analysis" class="p-link primary" target="_blank">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/churn-analysis/blob/main/churn_analysis.ipynb" class="p-link" target="_blank">Notebook ↗</a>
         </div>
       </div>
     </div>
@@ -371,7 +392,7 @@
           <span class="t-chip">Plotly</span><span class="t-chip">ydata-profiling</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/yourusername/healthcare-analysis" class="p-link primary" target="_blank">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/healthcare-analysis" class="p-link primary" target="_blank">GitHub ↗</a>
           <a href="https://nbviewer.org" class="p-link" target="_blank">Notebook</a>
         </div>
       </div>
@@ -395,7 +416,7 @@
           <span class="t-chip">NumPy</span><span class="t-chip">Plotly</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/yourusername/portfolio-risk" class="p-link primary" target="_blank">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/portfolio-risk" class="p-link primary" target="_blank">GitHub ↗</a>
           <a href="https://your-app.streamlit.app" class="p-link" target="_blank">Live Demo ↗</a>
         </div>
       </div>
@@ -419,7 +440,7 @@
           <span class="t-chip">statsmodels</span><span class="t-chip">pandas</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/yourusername/sales-forecasting" class="p-link primary" target="_blank">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/sales-forecasting" class="p-link primary" target="_blank">GitHub ↗</a>
           <a href="https://nbviewer.org" class="p-link" target="_blank">Notebook</a>
         </div>
       </div>
@@ -443,7 +464,7 @@
           <span class="t-chip">Tableau Public</span><span class="t-chip">K-Means</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/yourusername/hr-attrition" class="p-link primary" target="_blank">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/hr-attrition" class="p-link primary" target="_blank">GitHub ↗</a>
           <a href="https://public.tableau.com" class="p-link" target="_blank">Dashboard ↗</a>
         </div>
       </div>
@@ -467,7 +488,7 @@
           <span class="t-chip">geopy</span><span class="t-chip">scikit-learn</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/yourusername/real-estate" class="p-link primary" target="_blank">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/real-estate" class="p-link primary" target="_blank">GitHub ↗</a>
           <a href="https://nbviewer.org" class="p-link" target="_blank">Notebook</a>
         </div>
       </div>
@@ -491,7 +512,7 @@
           <span class="t-chip">Window Functions</span><span class="t-chip">Python</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/yourusername/olist-sql" class="p-link primary" target="_blank">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/olist-sql" class="p-link primary" target="_blank">GitHub ↗</a>
         </div>
       </div>
     </div>
@@ -514,7 +535,7 @@
           <span class="t-chip">SciPy</span><span class="t-chip">Plotly</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/yourusername/ab-testing" class="p-link primary" target="_blank">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/ab-testing" class="p-link primary" target="_blank">GitHub ↗</a>
           <a href="https://nbviewer.org" class="p-link" target="_blank">Notebook</a>
         </div>
       </div>
@@ -539,7 +560,7 @@
 <footer>
   <small>© 2025 Your Name</small>
   <div class="f-links">
-    <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+    <a href="https://github.com/Iniisaac24" target="_blank">GitHub</a>
     <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
     <a href="mailto:your@email.com">Email</a>
   </div>
@@ -550,6 +571,12 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 10);
   }, { passive: true });
+
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
 
   const btns  = document.querySelectorAll('.f-btn');
   const items = document.querySelectorAll('.proj-item');
