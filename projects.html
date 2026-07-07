@@ -89,7 +89,7 @@
 <!-- HEADER -->
 <header class="page-header">
   <p class="section-label">Portfolio</p>
-  <h1 class="page-title">Eight projects.<br>One live, seven in build.</h1>
+  <h1 class="page-title">Eight projects.<br>Two live, six in build.</h1>
   <p class="page-sub">Each project tackles a different industry and analytical challenge. Completed work links straight to its code; in-progress work shows the planned approach.</p>
 </header>
 
@@ -136,16 +136,20 @@
     <div class="proj-content">
       <div class="proj-meta">
         <span class="proj-domain">Healthcare · Statistical Analysis</span>
-        <span class="proj-status"><span class="s-dot wip"></span>In progress</span>
+        <span class="proj-status"><span class="s-dot"></span>Complete</span>
       </div>
       <h2 class="proj-title">Hospital Readmission Analysis</h2>
-      <p class="proj-desc">100,000+ patient records from the Diabetes 130-US dataset. Plan: use chi-square and Mann-Whitney tests to validate which differences in 30-day readmission are statistically significant rather than just visually apparent.</p>
+      <p class="proj-desc">Statistical analysis of 101,766 diabetic inpatient encounters (Diabetes 130-US) — chi-square and Mann-Whitney tests to find which factors are genuinely associated with 30-day readmission.</p>
+      <div class="proj-outcome"><strong>Outcome —</strong> Prior inpatient visits are the strongest signal (p ≈ 0); insulin use and diagnosis count follow. A1C result is <em>not</em> associated (p=0.83). Overall 30-day readmission rate: 11.16%.</div>
       <div class="proj-footer">
         <div class="proj-tools">
-          <span class="t-chip">Python</span><span class="t-chip">SciPy</span>
-          <span class="t-chip">Plotly</span><span class="t-chip">ydata-profiling</span>
+          <span class="t-chip">Python</span><span class="t-chip">pandas</span>
+          <span class="t-chip">SciPy</span><span class="t-chip">seaborn</span>
         </div>
-        <div class="proj-links"><span class="p-soon">Write-up coming soon</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Iniisaac24/healthcare-readmission" class="p-link primary" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/healthcare-readmission/blob/main/healthcare_readmission.ipynb" class="p-link" target="_blank" rel="noopener">Notebook ↗</a>
+        </div>
       </div>
     </div>
   </article>

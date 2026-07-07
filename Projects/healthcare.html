@@ -4,12 +4,32 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Hospital Readmission Analysis — in progress" />
+  <meta name="description" content="Hospital Readmission Analysis — 30-day readmission drivers on 101k diabetic encounters" />
   <title>Hospital Readmission Analysis — Ini Isaac Aniefiok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/theme.css" />
   <link rel="stylesheet" href="../assets/project.css" />
+  <style>
+    .links-row { display:flex; gap:16px; flex-wrap:wrap; margin-top:22px; }
+    .btn-link { font-size:13px; font-weight:500; color:var(--ink); text-decoration:none; border:1px solid var(--line); border-radius:5px; padding:8px 16px; transition:border-color .15s,color .15s; }
+    .btn-link:hover { border-color:var(--mid); }
+    .btn-link.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .btn-link.primary:hover { opacity:.88; }
+    .findings { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+    .finding { display:grid; grid-template-columns:20px 1fr; gap:12px; align-items:baseline; }
+    .f-bullet { width:5px; height:5px; border-radius:50%; background:var(--accent); margin-top:7px; }
+    .f-text { font-size:13.5px; font-weight:300; color:var(--mid); line-height:1.7; }
+    .f-text strong { font-weight:500; color:var(--ink); }
+    .stat-band { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:8px; }
+    .sb { background:var(--bg2); padding:20px 18px; text-align:center; }
+    .sb-n { font-family:'Instrument Sans',sans-serif; font-size:26px; color:var(--ink); }
+    .sb-l { font-size:11.5px; color:var(--dim); margin-top:4px; }
+    figure { margin-top:20px; }
+    figure img { width:100%; border:1px solid var(--line); border-radius:8px; }
+    figure figcaption { font-size:12px; color:var(--dim); margin-top:8px; }
+    @media (max-width:640px){ .stat-band { grid-template-columns:1fr; } }
+  </style>
 </head>
 <body data-base="..">
 
@@ -24,35 +44,72 @@
 <header class="hero">
   <p class="proj-label">Project 02 · Healthcare · Statistical Analysis</p>
   <h1>Hospital Readmission Analysis</h1>
-  <span class="status-badge"><span class="s-dot wip"></span>In progress</span>
-  <p class="hero-sub">Investigating which clinical factors drive 30-day hospital readmissions in the Diabetes 130-US dataset (100,000+ encounters) — and validating them with proper statistical testing rather than eyeballing charts.</p>
+  <span class="status-badge"><span class="s-dot"></span>Complete</span>
+  <p class="hero-sub">Which patient factors are genuinely associated with 30-day hospital readmission? A statistical analysis of 101,766 diabetic inpatient encounters — every claim backed by a hypothesis test, not just a chart.</p>
+  <div class="links-row">
+    <a class="btn-link primary" href="https://github.com/Iniisaac24/healthcare-readmission/blob/main/healthcare_readmission.ipynb" target="_blank" rel="noopener">View the notebook ↗</a>
+    <a class="btn-link" href="https://github.com/Iniisaac24/healthcare-readmission" target="_blank" rel="noopener">GitHub repo ↗</a>
+  </div>
 </header>
 
 <div class="body">
   <div class="section">
-    <p class="section-label">Planned Approach</p>
-    <h2>What this project will cover</h2>
-    <div class="steps">
-      <div class="step"><span class="step-n">01</span><div><p class="step-title">Profile &amp; clean</p><p class="step-desc">Load the Diabetes 130-US dataset, handle missing and placeholder-coded values, and consolidate diagnosis codes into clinical groups.</p></div></div>
-      <div class="step"><span class="step-n">02</span><div><p class="step-title">Exploratory analysis</p><p class="step-desc">Break down 30-day readmission rates by diagnosis group, age band, and prior utilisation to form hypotheses.</p></div></div>
-      <div class="step"><span class="step-n">03</span><div><p class="step-title">Statistical testing</p><p class="step-desc">Chi-square tests for categorical associations and Mann-Whitney U for skewed numeric variables, to separate real signal from noise.</p></div></div>
-      <div class="step"><span class="step-n">04</span><div><p class="step-title">Recommendations</p><p class="step-desc">Translate statistically significant findings into concrete clinical recommendations.</p></div></div>
+    <p class="section-label">Headline</p>
+    <div class="stat-band">
+      <div class="sb"><div class="sb-n">101,766</div><div class="sb-l">encounters</div></div>
+      <div class="sb"><div class="sb-n">11.16%</div><div class="sb-l">30-day readmission rate</div></div>
+      <div class="sb"><div class="sb-n">7</div><div class="sb-l">factors tested</div></div>
     </div>
   </div>
 
   <div class="section">
-    <p class="section-label">Tools &amp; Libraries</p>
-    <h2>Planned stack</h2>
+    <p class="section-label">Approach</p>
+    <h2>From raw encounters to tested associations</h2>
+    <div class="steps">
+      <div class="step"><span class="step-n">01</span><div><p class="step-title">Clean</p><p class="step-desc">Converted the dataset's <code>?</code> missing-marker to NaN, dropped high-missing columns (<code>weight</code> was 96.9% empty), and collapsed the target to a binary 30-day readmission flag.</p></div></div>
+      <div class="step"><span class="step-n">02</span><div><p class="step-title">Group diagnoses</p><p class="step-desc">Mapped ICD-9 <code>diag_1</code> codes into clinical categories (circulatory, respiratory, diabetes, …).</p></div></div>
+      <div class="step"><span class="step-n">03</span><div><p class="step-title">Test, don't eyeball</p><p class="step-desc">Chi-square for categorical associations and Mann-Whitney U for skewed continuous variables — reporting p-values, not just visual differences.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Findings</p>
+    <h2>What actually predicts readmission — and what doesn't</h2>
+    <div class="findings">
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Prior inpatient visits are the strongest signal</strong> (Mann-Whitney p ≈ 0). A patient's history of previous admissions outweighs any single clinical variable — the clearest lever for a discharge-follow-up protocol.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Medication burden matters:</strong> insulin use (χ²=190.8, p=4e-41) and total diagnosis count (p=2.8e-51) are strongly associated — both proxies for case complexity.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>A1C result is <em>not</em> associated with readmission (p=0.83)</strong> — despite being the dataset's namesake variable, and it's missing for 83% of encounters. A commonly-assumed driver the data does not support.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Diagnosis category is significant but weak:</strong> readmission rates span only 9.5%–13.0% across groups. Circulatory patients sit at 1.03× the overall rate — not a strong stratifier on its own.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Clear age gradient</strong> (χ²=116.6, p=6.5e-21): from 1.9% for children to ~12% for elderly patients.</p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Evidence</p>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/healthcare-readmission/main/figures/readmit_by_age.png" alt="30-day readmission rate by age band" />
+      <figcaption>30-day readmission rate by age band — a clear gradient with patient age.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/healthcare-readmission/main/figures/readmit_by_diagnosis.png" alt="30-day readmission rate by primary diagnosis" />
+      <figcaption>Readmission rate by primary diagnosis — significant, but a narrow 9.5%–13% spread.</figcaption>
+    </figure>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Tools &amp; Data</p>
+    <h2>Stack</h2>
     <div class="tools-wrap">
       <span class="t-chip">Python</span><span class="t-chip">pandas</span>
-      <span class="t-chip">SciPy</span><span class="t-chip">Plotly</span>
-      <span class="t-chip">ydata-profiling</span>
+      <span class="t-chip">SciPy</span><span class="t-chip">seaborn</span>
+      <span class="t-chip">matplotlib</span><span class="t-chip">Jupyter</span>
     </div>
+    <p style="font-size:13px;color:var(--mid);margin-top:16px;line-height:1.7;">Data: <a href="https://archive.ics.uci.edu/dataset/296/diabetes+130-us+hospitals+for+years+1999-2008" target="_blank" rel="noopener" style="color:var(--accent);">UCI Diabetes 130-US Hospitals (1999–2008)</a> — 101,766 encounters.</p>
   </div>
 
   <div class="proj-nav">
     <a href="../projects.html" class="pn-link">← All Projects</a>
-    <a href="churn.html" class="pn-link primary">See a completed project: Churn →</a>
+    <a href="churn.html" class="pn-link primary">Next completed project: Churn →</a>
   </div>
 </div>
 
