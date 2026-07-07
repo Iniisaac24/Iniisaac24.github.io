@@ -4,12 +4,38 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Employee Attrition Analysis — in progress" />
+  <meta name="description" content="Employee Attrition Analysis — flight-risk model and segmentation on 1,470 employees" />
   <title>Employee Attrition Analysis — Ini Isaac Aniefiok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/theme.css" />
   <link rel="stylesheet" href="../assets/project.css" />
+  <style>
+    .links-row { display:flex; gap:16px; flex-wrap:wrap; margin-top:22px; }
+    .btn-link { font-size:13px; font-weight:500; color:var(--ink); text-decoration:none; border:1px solid var(--line); border-radius:5px; padding:8px 16px; transition:border-color .15s,color .15s; }
+    .btn-link:hover { border-color:var(--mid); }
+    .btn-link.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .btn-link.primary:hover { opacity:.88; }
+    .findings { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+    .finding { display:grid; grid-template-columns:20px 1fr; gap:12px; align-items:baseline; }
+    .f-bullet { width:5px; height:5px; border-radius:50%; background:var(--accent); margin-top:7px; }
+    .f-text { font-size:13.5px; font-weight:300; color:var(--mid); line-height:1.7; }
+    .f-text strong { font-weight:500; color:var(--ink); }
+    .stat-band { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:8px; }
+    .sb { background:var(--bg2); padding:20px 16px; text-align:center; }
+    .sb-n { font-family:'Instrument Sans',sans-serif; font-size:24px; color:var(--ink); }
+    .sb-l { font-size:11px; color:var(--dim); margin-top:4px; }
+    figure { margin-top:20px; }
+    figure img { width:100%; border:1px solid var(--line); border-radius:8px; }
+    figure figcaption { font-size:12px; color:var(--dim); margin-top:8px; }
+    table.mt { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
+    table.mt th, table.mt td { text-align:left; padding:8px 12px; border-bottom:1px solid var(--line); color:var(--mid); }
+    table.mt th { color:var(--dim); font-weight:500; font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
+    table.mt td strong { color:var(--ink); }
+    ol.recs { margin:8px 0 0 18px; } ol.recs li { font-size:13.5px; font-weight:300; color:var(--mid); line-height:1.7; margin-bottom:10px; }
+    ol.recs li strong { color:var(--ink); font-weight:500; }
+    @media (max-width:640px){ .stat-band { grid-template-columns:1fr 1fr; } }
+  </style>
 </head>
 <body data-base="..">
 
@@ -24,34 +50,83 @@
 <header class="hero">
   <p class="proj-label">Project 05 · HR · People Analytics</p>
   <h1>Employee Attrition Analysis</h1>
-  <span class="status-badge"><span class="s-dot wip"></span>In progress</span>
-  <p class="hero-sub">Identifying flight-risk employees and the drivers behind attrition on the IBM HR dataset — turning people data into interventions HR can actually act on.</p>
+  <span class="status-badge"><span class="s-dot"></span>Complete</span>
+  <p class="hero-sub">Who is most likely to leave, why, and what can we do about it? A people-analytics study of 1,470 employees — EDA, a Random Forest flight-risk model, and K-Means segmentation, ending in three concrete HR interventions.</p>
+  <div class="links-row">
+    <a class="btn-link primary" href="https://github.com/Iniisaac24/hr-attrition/blob/main/hr_attrition.ipynb" target="_blank" rel="noopener">View the notebook ↗</a>
+    <a class="btn-link" href="https://github.com/Iniisaac24/hr-attrition" target="_blank" rel="noopener">GitHub repo ↗</a>
+  </div>
 </header>
 
 <div class="body">
   <div class="section">
-    <p class="section-label">Planned Approach</p>
-    <h2>What this project will cover</h2>
-    <div class="steps">
-      <div class="step"><span class="step-n">01</span><div><p class="step-title">Exploratory analysis</p><p class="step-desc">Examine attrition against satisfaction, overtime, tenure, and role to surface patterns.</p></div></div>
-      <div class="step"><span class="step-n">02</span><div><p class="step-title">Flight-risk model</p><p class="step-desc">A Random Forest to score each employee's probability of leaving, evaluated on recall for the leavers.</p></div></div>
-      <div class="step"><span class="step-n">03</span><div><p class="step-title">Segmentation</p><p class="step-desc">K-Means clustering into interpretable risk profiles for targeted retention.</p></div></div>
-      <div class="step"><span class="step-n">04</span><div><p class="step-title">Recommendations</p><p class="step-desc">Summarise into HR policy recommendations, supported by a Tableau Public view.</p></div></div>
+    <p class="section-label">Headline</p>
+    <div class="stat-band">
+      <div class="sb"><div class="sb-n">1,470</div><div class="sb-l">employees · 16.1% left</div></div>
+      <div class="sb"><div class="sb-n">55.1%</div><div class="sb-l">attrition: overtime &amp; &lt;2yr</div></div>
+      <div class="sb"><div class="sb-n">0.773</div><div class="sb-l">model AUC-ROC</div></div>
+      <div class="sb"><div class="sb-n">2.82×</div><div class="sb-l">lift, top-20% flagged</div></div>
     </div>
   </div>
 
   <div class="section">
-    <p class="section-label">Tools &amp; Libraries</p>
-    <h2>Planned stack</h2>
-    <div class="tools-wrap">
-      <span class="t-chip">Python</span><span class="t-chip">scikit-learn</span>
-      <span class="t-chip">Tableau Public</span><span class="t-chip">K-Means</span>
+    <p class="section-label">Findings</p>
+    <h2>Overtime and early tenure are the danger zone</h2>
+    <div class="findings">
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Overtime is the clearest signal:</strong> 30.5% attrition with overtime vs. 10.4% without. Combine it with under-2-years tenure and attrition hits <strong>55.1%</strong> — more than 3× the company average.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>The flight-risk model is decision-useful.</strong> A Random Forest scores each employee (AUC-ROC 0.773); flagging the top 20% highest-risk captures <strong>55.9% of all leavers</strong> at 45% precision — a 2.82× lift over blanket outreach.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Top drivers:</strong> monthly income, age, overtime, years at company, total working years, and stock-option level — a picture of young, lower-paid, early-career staff.</p></div>
     </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Segmentation · K-Means</p>
+    <h2>Four workforce profiles, one clear risk cluster</h2>
+    <table class="mt">
+      <tr><th>Segment</th><th>Size</th><th>Attrition</th><th>Median income</th><th>Median age / tenure</th></tr>
+      <tr><td><strong>Young &amp; early-career</strong></td><td>502</td><td><strong>23.5%</strong></td><td>$2,848</td><td>30 / 3 yrs</td></tr>
+      <tr><td>Mid-career</td><td>279</td><td>22.2%</td><td>$4,556</td><td>35 / 5 yrs</td></tr>
+      <tr><td>Established</td><td>474</td><td>8.9%</td><td>$6,047</td><td>38 / 8 yrs</td></tr>
+      <tr><td>Senior &amp; tenured</td><td>215</td><td>7.0%</td><td>$16,752</td><td>48 / 16 yrs</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Recommendations</p>
+    <h2>Three interventions</h2>
+    <ol class="recs">
+      <li><strong>Cap or compensate overtime for early-tenure staff.</strong> The overtime × &lt;2-year cohort loses over half its people — the highest-ROI place to intervene.</li>
+      <li><strong>Review early-career pay bands.</strong> The low-income young segment churns at 23.5%; a tenure bonus around 18 months targets the biggest risk cluster directly.</li>
+      <li><strong>Bring stock options forward.</strong> Low stock-option level correlates with leaving — early equity for high-potential juniors is a cheap retention lever.</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Evidence</p>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/hr-attrition/main/figures/attrition_by_overtime.png" alt="Attrition by overtime status" />
+      <figcaption>Attrition rate by overtime status — nearly 3× higher for overtime workers.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/hr-attrition/main/figures/feature_importance.png" alt="Random Forest feature importance" />
+      <figcaption>Random Forest flight-risk drivers.</figcaption>
+    </figure>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Tools &amp; Data</p>
+    <h2>Stack</h2>
+    <div class="tools-wrap">
+      <span class="t-chip">Python</span><span class="t-chip">pandas</span>
+      <span class="t-chip">scikit-learn</span><span class="t-chip">Random Forest</span>
+      <span class="t-chip">K-Means</span><span class="t-chip">seaborn</span>
+    </div>
+    <p style="font-size:13px;color:var(--mid);margin-top:16px;line-height:1.7;">Data: <a href="https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset" target="_blank" rel="noopener" style="color:var(--accent);">IBM HR Analytics Employee Attrition</a> — 1,470 employees.</p>
   </div>
 
   <div class="proj-nav">
     <a href="../projects.html" class="pn-link">← All Projects</a>
-    <a href="churn.html" class="pn-link primary">See a completed project: Churn →</a>
+    <a href="churn.html" class="pn-link primary">Related: Churn prediction →</a>
   </div>
 </div>
 
