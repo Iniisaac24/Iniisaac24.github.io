@@ -89,7 +89,7 @@
 <!-- HEADER -->
 <header class="page-header">
   <p class="section-label">Portfolio</p>
-  <h1 class="page-title">Eight projects.<br>Five live, three in build.</h1>
+  <h1 class="page-title">Eight projects.<br>Six live, two in build.</h1>
   <p class="page-sub">Each project tackles a different industry and analytical challenge. Completed work links straight to its code; in-progress work shows the planned approach.</p>
 </header>
 
@@ -232,16 +232,20 @@
     <div class="proj-content">
       <div class="proj-meta">
         <span class="proj-domain">Real Estate · Geospatial</span>
-        <span class="proj-status"><span class="s-dot wip"></span>In progress</span>
+        <span class="proj-status"><span class="s-dot"></span>Complete</span>
       </div>
       <h2 class="proj-title">Property Price Prediction &amp; Mapping</h2>
-      <p class="proj-desc">Plan: XGBoost regression on King County housing data, with an interactive folium map overlaying predicted vs. actual prices to highlight under- and over-valued areas.</p>
+      <p class="proj-desc">XGBoost regression on 21,613 King County home sales, with an interactive folium map overlaying predicted vs. actual prices to flag under- and over-valued neighbourhoods.</p>
+      <div class="proj-outcome"><strong>Outcome —</strong> XGBoost reaches R² 0.913 (MAE ~$63k) vs. 0.61 for linear regression; latitude is the top driver. ZIP 98014 sells ~12% below model value — a value-investing flag.</div>
       <div class="proj-footer">
         <div class="proj-tools">
           <span class="t-chip">XGBoost</span><span class="t-chip">folium</span>
-          <span class="t-chip">geopy</span><span class="t-chip">scikit-learn</span>
+          <span class="t-chip">scikit-learn</span><span class="t-chip">pandas</span>
         </div>
-        <div class="proj-links"><span class="p-soon">Write-up coming soon</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Iniisaac24/real-estate-pricing" class="p-link primary" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/real-estate-pricing/blob/main/real_estate.ipynb" class="p-link" target="_blank" rel="noopener">Notebook ↗</a>
+        </div>
       </div>
     </div>
   </article>

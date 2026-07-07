@@ -4,12 +4,36 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Property Price Prediction & Mapping — in progress" />
+  <meta name="description" content="Property Price Prediction & Mapping — XGBoost + folium on 21,613 King County home sales" />
   <title>Property Price Prediction — Ini Isaac Aniefiok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/theme.css" />
   <link rel="stylesheet" href="../assets/project.css" />
+  <style>
+    .links-row { display:flex; gap:16px; flex-wrap:wrap; margin-top:22px; }
+    .btn-link { font-size:13px; font-weight:500; color:var(--ink); text-decoration:none; border:1px solid var(--line); border-radius:5px; padding:8px 16px; transition:border-color .15s,color .15s; }
+    .btn-link:hover { border-color:var(--mid); }
+    .btn-link.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .btn-link.primary:hover { opacity:.88; }
+    .findings { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+    .finding { display:grid; grid-template-columns:20px 1fr; gap:12px; align-items:baseline; }
+    .f-bullet { width:5px; height:5px; border-radius:50%; background:var(--accent); margin-top:7px; }
+    .f-text { font-size:13.5px; font-weight:300; color:var(--mid); line-height:1.7; }
+    .f-text strong { font-weight:500; color:var(--ink); }
+    .stat-band { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:8px; }
+    .sb { background:var(--bg2); padding:20px 16px; text-align:center; }
+    .sb-n { font-family:'Instrument Sans',sans-serif; font-size:24px; color:var(--ink); }
+    .sb-l { font-size:11px; color:var(--dim); margin-top:4px; }
+    figure { margin-top:20px; }
+    figure img { width:100%; border:1px solid var(--line); border-radius:8px; }
+    figure figcaption { font-size:12px; color:var(--dim); margin-top:8px; }
+    table.mt { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
+    table.mt th, table.mt td { text-align:left; padding:8px 12px; border-bottom:1px solid var(--line); color:var(--mid); }
+    table.mt th { color:var(--dim); font-weight:500; font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
+    table.mt td strong { color:var(--ink); }
+    @media (max-width:640px){ .stat-band { grid-template-columns:1fr 1fr; } }
+  </style>
 </head>
 <body data-base="..">
 
@@ -24,34 +48,72 @@
 <header class="hero">
   <p class="proj-label">Project 06 · Real Estate · Geospatial</p>
   <h1>Property Price Prediction<br>&amp; Mapping</h1>
-  <span class="status-badge"><span class="s-dot wip"></span>In progress</span>
-  <p class="hero-sub">Predicting King County home prices and mapping where the market is mispriced — pairing a regression model with an interactive map of under- and over-valued areas.</p>
+  <span class="status-badge"><span class="s-dot"></span>Complete</span>
+  <p class="hero-sub">Predicting fair market value across 21,613 King County home sales — then mapping the model's residuals to reveal which neighbourhoods are systematically under- or over-valued.</p>
+  <div class="links-row">
+    <a class="btn-link primary" href="https://github.com/Iniisaac24/real-estate-pricing/blob/main/real_estate.ipynb" target="_blank" rel="noopener">View the notebook ↗</a>
+    <a class="btn-link" href="https://htmlpreview.github.io/?https://github.com/Iniisaac24/real-estate-pricing/blob/main/map.html" target="_blank" rel="noopener">Interactive map ↗</a>
+    <a class="btn-link" href="https://github.com/Iniisaac24/real-estate-pricing" target="_blank" rel="noopener">GitHub repo ↗</a>
+  </div>
 </header>
 
 <div class="body">
   <div class="section">
-    <p class="section-label">Planned Approach</p>
-    <h2>What this project will cover</h2>
-    <div class="steps">
-      <div class="step"><span class="step-n">01</span><div><p class="step-title">Clean &amp; engineer</p><p class="step-desc">Prepare King County housing data and engineer location, size, and condition features.</p></div></div>
-      <div class="step"><span class="step-n">02</span><div><p class="step-title">Model</p><p class="step-desc">XGBoost regression with cross-validated tuning, evaluated on a held-out set.</p></div></div>
-      <div class="step"><span class="step-n">03</span><div><p class="step-title">Find mispricing</p><p class="step-desc">Compare predicted vs. actual prices to flag consistently under- or over-valued neighbourhoods.</p></div></div>
-      <div class="step"><span class="step-n">04</span><div><p class="step-title">Map it</p><p class="step-desc">Render an interactive folium map so the pricing gaps are visible at a glance.</p></div></div>
+    <p class="section-label">Headline</p>
+    <div class="stat-band">
+      <div class="sb"><div class="sb-n">21,613</div><div class="sb-l">home sales</div></div>
+      <div class="sb"><div class="sb-n">0.913</div><div class="sb-l">XGBoost R²</div></div>
+      <div class="sb"><div class="sb-n">$63k</div><div class="sb-l">median-scale MAE</div></div>
+      <div class="sb"><div class="sb-n">+11.9%</div><div class="sb-l">top undervalued ZIP</div></div>
     </div>
   </div>
 
   <div class="section">
-    <p class="section-label">Tools &amp; Libraries</p>
-    <h2>Planned stack</h2>
-    <div class="tools-wrap">
-      <span class="t-chip">XGBoost</span><span class="t-chip">folium</span>
-      <span class="t-chip">geopy</span><span class="t-chip">scikit-learn</span>
+    <p class="section-label">Model comparison · 25% holdout</p>
+    <h2>Non-linearity is worth 30 points of R²</h2>
+    <table class="mt">
+      <tr><th>Model</th><th>R²</th><th>MAE</th></tr>
+      <tr><td>Linear Regression</td><td>0.614</td><td>$104,680</td></tr>
+      <tr><td><strong>XGBoost</strong></td><td><strong>0.913</strong></td><td><strong>$63,258</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Findings</p>
+    <h2>Location is the whole story</h2>
+    <div class="findings">
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>XGBoost explains 91% of price variance</strong> (MAE ~$63k), a huge jump over the linear baseline (0.61) — which can't capture the non-linear location premium.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Latitude is the single most important feature</strong> (permutation importance 0.43), ahead of living area, distance to downtown Seattle, and construction grade. In King County, <em>where</em> beats <em>what</em>.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>The model flags mispriced ZIPs:</strong> 98014 (+11.9%), 98168 (+7.7%) and 98166 (+7.1%) sell consistently below model value — a value-investing shortlist — while 98070 (−8.0%) sells above.</p></div>
     </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Evidence</p>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/real-estate-pricing/main/figures/valuation_map.png" alt="Map of valuation gaps across King County" />
+      <figcaption>Every holdout sale coloured by valuation gap — green undervalued, red overvalued. <a href="https://htmlpreview.github.io/?https://github.com/Iniisaac24/real-estate-pricing/blob/main/map.html" target="_blank" rel="noopener" style="color:var(--accent);">Interactive version ↗</a></figcaption>
+    </figure>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/real-estate-pricing/main/figures/predicted_vs_actual.png" alt="Predicted vs actual prices" />
+      <figcaption>XGBoost predicted vs. actual sale price (R² 0.913).</figcaption>
+    </figure>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Tools &amp; Data</p>
+    <h2>Stack</h2>
+    <div class="tools-wrap">
+      <span class="t-chip">Python</span><span class="t-chip">XGBoost</span>
+      <span class="t-chip">scikit-learn</span><span class="t-chip">folium</span>
+      <span class="t-chip">pandas</span><span class="t-chip">matplotlib</span>
+    </div>
+    <p style="font-size:13px;color:var(--mid);margin-top:16px;line-height:1.7;">Data: <a href="https://www.kaggle.com/datasets/harlfoxem/housesalesprediction" target="_blank" rel="noopener" style="color:var(--accent);">King County House Sales</a> — 21,613 sales, 2014–2015.</p>
   </div>
 
   <div class="proj-nav">
     <a href="../projects.html" class="pn-link">← All Projects</a>
-    <a href="churn.html" class="pn-link primary">See a completed project: Churn →</a>
+    <a href="finance.html" class="pn-link primary">Another completed project: Finance →</a>
   </div>
 </div>
 
