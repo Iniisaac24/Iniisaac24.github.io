@@ -89,7 +89,7 @@
 <!-- HEADER -->
 <header class="page-header">
   <p class="section-label">Portfolio</p>
-  <h1 class="page-title">Eight projects.<br>Two live, six in build.</h1>
+  <h1 class="page-title">Eight projects.<br>Three live, five in build.</h1>
   <p class="page-sub">Each project tackles a different industry and analytical challenge. Completed work links straight to its code; in-progress work shows the planned approach.</p>
 </header>
 
@@ -160,16 +160,20 @@
     <div class="proj-content">
       <div class="proj-meta">
         <span class="proj-domain">Finance · Risk Analytics</span>
-        <span class="proj-status"><span class="s-dot wip"></span>In progress</span>
+        <span class="proj-status"><span class="s-dot"></span>Complete</span>
       </div>
       <h2 class="proj-title">Investment Portfolio Risk Dashboard</h2>
-      <p class="proj-desc">Plan: a Streamlit dashboard pulling live data for ~15 holdings via yfinance — tracking Sharpe Ratio, 95% VaR, Max Drawdown, and a sector correlation heatmap benchmarked against the S&P 500.</p>
+      <p class="proj-desc">Risk analysis of a 13-stock, 5-sector equal-weight portfolio vs. the S&P 500 — Sharpe, 95% VaR, Max Drawdown, and correlation structure from 3 years of live yfinance data, with a Streamlit dashboard.</p>
+      <div class="proj-outcome"><strong>Outcome —</strong> 23.6% annual return vs. 20.9% for the S&P 500 at a Sharpe of 1.61. No holding pair exceeds 0.85 correlation (avg 0.167) — genuinely diversified. 95% 1-day VaR: ~$1,039 per $100k.</div>
       <div class="proj-footer">
         <div class="proj-tools">
           <span class="t-chip">Streamlit</span><span class="t-chip">yfinance</span>
           <span class="t-chip">NumPy</span><span class="t-chip">Plotly</span>
         </div>
-        <div class="proj-links"><span class="p-soon">Write-up coming soon</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Iniisaac24/portfolio-risk" class="p-link primary" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/portfolio-risk/blob/main/portfolio_risk.ipynb" class="p-link" target="_blank" rel="noopener">Notebook ↗</a>
+        </div>
       </div>
     </div>
   </article>

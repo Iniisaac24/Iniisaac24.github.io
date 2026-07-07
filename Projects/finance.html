@@ -4,12 +4,33 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Investment Portfolio Risk Dashboard — in progress" />
+  <meta name="description" content="Investment Portfolio Risk Dashboard — Sharpe, VaR, drawdown and diversification vs the S&P 500" />
   <title>Portfolio Risk Dashboard — Ini Isaac Aniefiok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/theme.css" />
   <link rel="stylesheet" href="../assets/project.css" />
+  <style>
+    .links-row { display:flex; gap:16px; flex-wrap:wrap; margin-top:22px; }
+    .btn-link { font-size:13px; font-weight:500; color:var(--ink); text-decoration:none; border:1px solid var(--line); border-radius:5px; padding:8px 16px; transition:border-color .15s,color .15s; }
+    .btn-link:hover { border-color:var(--mid); }
+    .btn-link.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .btn-link.primary:hover { opacity:.88; }
+    .findings { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+    .finding { display:grid; grid-template-columns:20px 1fr; gap:12px; align-items:baseline; }
+    .f-bullet { width:5px; height:5px; border-radius:50%; background:var(--accent); margin-top:7px; }
+    .f-text { font-size:13.5px; font-weight:300; color:var(--mid); line-height:1.7; }
+    .f-text strong { font-weight:500; color:var(--ink); }
+    .stat-band { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:8px; }
+    .sb { background:var(--bg2); padding:20px 16px; text-align:center; }
+    .sb-n { font-family:'Instrument Sans',sans-serif; font-size:24px; color:var(--ink); }
+    .sb-l { font-size:11px; color:var(--dim); margin-top:4px; }
+    figure { margin-top:20px; }
+    figure img { width:100%; border:1px solid var(--line); border-radius:8px; }
+    figure figcaption { font-size:12px; color:var(--dim); margin-top:8px; }
+    .note { font-size:12.5px; color:var(--dim); margin-top:14px; }
+    @media (max-width:640px){ .stat-band { grid-template-columns:1fr 1fr; } }
+  </style>
 </head>
 <body data-base="..">
 
@@ -24,35 +45,73 @@
 <header class="hero">
   <p class="proj-label">Project 03 · Finance · Risk Analytics</p>
   <h1>Investment Portfolio<br>Risk Dashboard</h1>
-  <span class="status-badge"><span class="s-dot wip"></span>In progress</span>
-  <p class="hero-sub">A Streamlit dashboard that quantifies portfolio risk from live market data and benchmarks it against the S&amp;P 500 — Sharpe Ratio, Value at Risk, Max Drawdown, and sector correlation in one view.</p>
+  <span class="status-badge"><span class="s-dot"></span>Complete</span>
+  <p class="hero-sub">How risky is a 13-stock, 5-sector portfolio — and is it actually diversified? Quantitative risk metrics computed from 3 years of live Yahoo Finance data, benchmarked against the S&amp;P 500, with an interactive Streamlit dashboard.</p>
+  <div class="links-row">
+    <a class="btn-link primary" href="https://github.com/Iniisaac24/portfolio-risk/blob/main/portfolio_risk.ipynb" target="_blank" rel="noopener">View the notebook ↗</a>
+    <a class="btn-link" href="https://github.com/Iniisaac24/portfolio-risk" target="_blank" rel="noopener">GitHub repo ↗</a>
+  </div>
 </header>
 
 <div class="body">
   <div class="section">
-    <p class="section-label">Planned Approach</p>
-    <h2>What this project will cover</h2>
-    <div class="steps">
-      <div class="step"><span class="step-n">01</span><div><p class="step-title">Live data</p><p class="step-desc">Pull daily prices for ~15 holdings via yfinance and compute a clean returns series.</p></div></div>
-      <div class="step"><span class="step-n">02</span><div><p class="step-title">Risk metrics</p><p class="step-desc">Sharpe Ratio, 95% historical VaR, and Maximum Drawdown, each benchmarked against the S&amp;P 500.</p></div></div>
-      <div class="step"><span class="step-n">03</span><div><p class="step-title">Concentration risk</p><p class="step-desc">A sector correlation heatmap to surface holdings that move together and undermine diversification.</p></div></div>
-      <div class="step"><span class="step-n">04</span><div><p class="step-title">Ship it</p><p class="step-desc">Package as an interactive Streamlit app — this page will show screenshots plus a launch link once it is deployed.</p></div></div>
+    <p class="section-label">Headline · as of 2026-07-07</p>
+    <div class="stat-band">
+      <div class="sb"><div class="sb-n">23.6%</div><div class="sb-l">annual return (S&amp;P: 20.9%)</div></div>
+      <div class="sb"><div class="sb-n">1.61</div><div class="sb-l">Sharpe ratio</div></div>
+      <div class="sb"><div class="sb-n">1.04%</div><div class="sb-l">95% 1-day VaR</div></div>
+      <div class="sb"><div class="sb-n">−14.9%</div><div class="sb-l">max drawdown</div></div>
     </div>
   </div>
 
   <div class="section">
-    <p class="section-label">Tools &amp; Libraries</p>
-    <h2>Planned stack</h2>
-    <div class="tools-wrap">
-      <span class="t-chip">Streamlit</span><span class="t-chip">yfinance</span>
-      <span class="t-chip">NumPy</span><span class="t-chip">pandas</span>
-      <span class="t-chip">Plotly</span>
+    <p class="section-label">Approach</p>
+    <h2>From price series to risk metrics</h2>
+    <div class="steps">
+      <div class="step"><span class="step-n">01</span><div><p class="step-title">Pull live data</p><p class="step-desc">3 years of daily adjusted close for 13 holdings via <code>yfinance</code>, with the S&amp;P 500 (<code>^GSPC</code>) as benchmark and the 13-week T-bill (<code>^IRX</code>) as the risk-free rate.</p></div></div>
+      <div class="step"><span class="step-n">02</span><div><p class="step-title">Returns &amp; risk</p><p class="step-desc">Daily returns, annualised return and volatility, Sharpe ratio, 95% historical Value at Risk, and maximum drawdown.</p></div></div>
+      <div class="step"><span class="step-n">03</span><div><p class="step-title">Diversification</p><p class="step-desc">A full correlation matrix, flagging any holding pair above 0.85 as concentration risk.</p></div></div>
+      <div class="step"><span class="step-n">04</span><div><p class="step-title">Dashboard</p><p class="step-desc">An interactive Streamlit app (<code>app.py</code>) recomputes every metric for a chosen ticker set and lookback — one-click deployable on Streamlit Community Cloud.</p></div></div>
     </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Findings</p>
+    <h2>Strong risk-adjusted returns, genuinely diversified</h2>
+    <div class="findings">
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Beat the benchmark with lower volatility.</strong> The equal-weight portfolio returned 23.6% annualised vs. 20.9% for the S&amp;P 500, at a Sharpe ratio of 1.61 — strong risk-adjusted performance.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>No concentration risk.</strong> Not a single holding pair exceeds 0.85 correlation, and the average pairwise correlation is just 0.167 — the portfolio is genuinely diversified, with no cluster to unwind.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Downside is quantified and contained.</strong> A 95% 1-day VaR of 1.04% means losses stay under ~$1,039 per $100k on 95% of days; the worst peak-to-trough decline over three years was ~15%.</p></div>
+    </div>
+    <p class="note">Metrics are as of 2026-07-07 and recompute from live market data every time the code runs.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Evidence</p>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/portfolio-risk/main/figures/cumulative_returns.png" alt="Cumulative return vs S&P 500" />
+      <figcaption>Cumulative return vs. the S&amp;P 500 over three years.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/portfolio-risk/main/figures/correlation_heatmap.png" alt="Holdings correlation heatmap" />
+      <figcaption>Correlation matrix of daily returns — uniformly low, confirming diversification.</figcaption>
+    </figure>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Tools &amp; Data</p>
+    <h2>Stack</h2>
+    <div class="tools-wrap">
+      <span class="t-chip">Python</span><span class="t-chip">yfinance</span>
+      <span class="t-chip">NumPy</span><span class="t-chip">pandas</span>
+      <span class="t-chip">Streamlit</span><span class="t-chip">Plotly</span>
+    </div>
+    <p style="font-size:13px;color:var(--mid);margin-top:16px;line-height:1.7;">Data: live daily prices via <a href="https://pypi.org/project/yfinance/" target="_blank" rel="noopener" style="color:var(--accent);">Yahoo Finance (yfinance)</a> — 13 holdings across 5 sectors, 3-year window.</p>
   </div>
 
   <div class="proj-nav">
     <a href="../projects.html" class="pn-link">← All Projects</a>
-    <a href="churn.html" class="pn-link primary">See a completed project: Churn →</a>
+    <a href="churn.html" class="pn-link primary">Another completed project: Churn →</a>
   </div>
 </div>
 
