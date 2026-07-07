@@ -1,0 +1,41 @@
+/* ─────────────────────────────────────────────────────────
+   project.css — shared layout for project detail pages.
+   Pairs with theme.css (tokens/nav/footer).
+   ───────────────────────────────────────────────────────── */
+
+.hero { max-width: 75vw; margin: 0 auto; padding: 110px 40px 60px; border-bottom: 1px solid var(--line); }
+.proj-label { font-size: 11px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--dim); margin-bottom: 20px; }
+.hero h1 { font-family:'Instrument Sans',sans-serif; font-weight:400; font-size: clamp(32px, 5vw, 52px); line-height: 1.08; letter-spacing: -.02em; margin-bottom: 16px; }
+
+.status-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--mid); margin-bottom: 24px; }
+.s-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; }
+.s-dot.wip { background: #fbbf24; }
+
+.hero-sub { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.75; max-width: 560px; }
+
+.body { max-width: 75vw; margin: 0 auto; padding: 0 40px 100px; }
+.section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+.section:last-child { border-bottom: none; }
+.section-label { font-size: 11px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.body h2 { font-family:'Instrument Sans',sans-serif; font-weight:400; font-size: 26px; letter-spacing: -.015em; margin-bottom: 16px; color: var(--ink); }
+.body p { font-size: 14px; font-weight: 300; color: var(--mid); line-height: 1.8; margin-bottom: 14px; }
+
+.steps { display: flex; flex-direction: column; }
+.step { display: grid; grid-template-columns: 28px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.step:last-child { border-bottom: none; }
+.step-n { font-size: 11px; font-weight: 400; color: var(--dim); padding-top: 2px; }
+.step-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.step-desc { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.7; }
+
+.tools-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.t-chip { font-size: 11.5px; font-weight: 400; color: var(--mid); background: var(--bg2); padding: 5px 12px; border-radius: 3px; }
+
+.proj-nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 40px 0 0; flex-wrap: wrap; }
+.pn-link { font-size: 13px; font-weight: 400; color: var(--mid); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 1px; transition: color .15s, border-color .15s; }
+.pn-link:hover { color: var(--ink); border-color: var(--mid); }
+.pn-link.primary { color: var(--ink); border-bottom: 1.5px solid var(--ink); font-weight: 500; }
+.pn-link.primary:hover { opacity: .55; }
+
+@media (max-width: 900px) {
+  .hero, .body { padding-left: 20px; padding-right: 20px; }
+}

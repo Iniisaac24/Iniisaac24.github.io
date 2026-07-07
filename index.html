@@ -6,405 +6,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Data Analyst — turning raw data into decisions that matter." />
   <title>Your Name — Data Analyst</title>
+
+  <!-- Social preview -->
+  <meta property="og:title" content="Your Name — Data Analyst" />
+  <meta property="og:description" content="A data analytics portfolio — churn prediction, forecasting, SQL BI, and more." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://iniisaac24.github.io/" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/theme.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --ink:    #111110;
-      --mid:    #4a4a47;
-      --dim:    #b8b8b4;
-      --line:   #e8e8e4;
-      --bg:     #ffffff;
-      --bg2:    #f7f7f5;
-      --accent: #c4500a;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Geist', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ─────────────────────────────────────── */
-    nav {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 100;
-      height: 56px;
-      padding: 0 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color .25s;
-    }
-    nav.scrolled { border-bottom-color: var(--line); }
-
-    .nav-logo {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: -.01em;
-      text-decoration: none;
-      color: var(--ink);
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 32px;
-    }
-    .nav-links a {
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--mid);
-      text-decoration: none;
-      transition: color .15s;
-    }
-    .nav-links a:hover { color: var(--ink); }
-
-    .nav-resume {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--mid);
-      text-decoration: none;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1px;
-      transition: color .15s, border-color .15s;
-    }
-    .nav-resume:hover { color: var(--ink); border-color: var(--mid); }
-
-    /* ── HERO ────────────────────────────────────── */
-    #hero {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 148px 40px 96px;
-    }
+    /* ── page-specific: home ─────────────────────── */
+    #hero { max-width: 780px; margin: 0 auto; padding: 148px 40px 96px; }
 
     .avail {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12.5px;
-      font-weight: 400;
-      color: var(--mid);
-      margin-bottom: 40px;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12.5px; font-weight: 400; color: var(--mid); margin-bottom: 40px;
     }
-    .avail-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #4ade80;
-      animation: pulse 2.4s ease-in-out infinite;
-    }
+    .avail-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2.4s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
 
     h1 {
       font-family:'Instrument Sans',sans-serif; font-weight:700;
-      font-size: clamp(46px, 6.5vw, 80px);
-      line-height: 1.06;
-      letter-spacing: -.02em;
-      color: var(--ink);
-      margin-bottom: 28px;
+      font-size: clamp(46px, 6.5vw, 80px); line-height: 1.06;
+      letter-spacing: -.02em; color: var(--ink); margin-bottom: 28px;
     }
     h1 .accent { color: var(--accent); }
     h1 i { font-style: italic; color: var(--mid); }
 
-    .hero-body {
-      font-size: 16px;
-      font-weight: 300;
-      color: var(--mid);
-      line-height: 1.75;
-      max-width: 420px;
-      margin-bottom: 44px;
-    }
+    .hero-body { font-size: 16px; font-weight: 300; color: var(--mid); line-height: 1.75; max-width: 420px; margin-bottom: 44px; }
 
-    .hero-links {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-    }
+    .hero-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
     .hl-primary {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 1.5px solid var(--ink);
-      padding-bottom: 1px;
-      transition: opacity .15s;
+      font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none;
+      border-bottom: 1.5px solid var(--ink); padding-bottom: 1px; transition: opacity .15s;
     }
     .hl-primary:hover { opacity: .55; }
     .hl-secondary {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--mid);
-      text-decoration: none;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1px;
-      transition: color .15s, border-color .15s;
+      font-size: 14px; font-weight: 400; color: var(--mid); text-decoration: none;
+      border-bottom: 1px solid var(--line); padding-bottom: 1px; transition: color .15s, border-color .15s;
     }
     .hl-secondary:hover { color: var(--ink); border-color: var(--mid); }
 
-    /* ── TOOLS LINE ──────────────────────────────── */
-    .tools-row {
-      border-top: 1px solid var(--line);
-      padding: 22px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      overflow: hidden;
-    }
-    .tools-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      color: var(--dim);
-      white-space: nowrap;
-      margin-right: 32px;
-      flex-shrink: 0;
-    }
-    .tools-list {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .tools-list span {
-      font-size: 12.5px;
-      font-weight: 400;
-      color: var(--dim);
-      white-space: nowrap;
-    }
+    .tools-row { border-top: 1px solid var(--line); padding: 22px 40px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .tools-label { font-size: 11px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--dim); white-space: nowrap; margin-right: 32px; flex-shrink: 0; }
+    .tools-list { display: flex; gap: 24px; flex-wrap: wrap; }
+    .tools-list span { font-size: 12.5px; font-weight: 400; color: var(--dim); white-space: nowrap; }
 
-    /* ── SECTION ─────────────────────────────────── */
-    .section {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 80px 40px;
-      border-top: 1px solid var(--line);
-    }
+    .section { max-width: 780px; margin: 0 auto; padding: 80px 40px; border-top: 1px solid var(--line); }
+    .section-label { font-size: 11px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--dim); margin-bottom: 48px; }
+    .section-label--strong { font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: .04em; }
 
-    .section-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 48px;
-    }
-    .section-label--strong {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--ink);
-      letter-spacing: .04em;
-    }
-
-    /* ── PROJECT LIST ────────────────────────────── */
     .proj-list { display: flex; flex-direction: column; }
-
     .proj-row {
-      display: grid;
-      grid-template-columns: 32px 1fr auto;
-      align-items: baseline;
-      gap: 20px;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--line);
-      text-decoration: none;
-      color: inherit;
-      transition: background .15s;
+      display: grid; grid-template-columns: 32px 1fr auto; align-items: baseline; gap: 20px;
+      padding: 22px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; transition: background .15s;
     }
     .proj-row:first-child { border-top: 1px solid var(--line); }
-
     .proj-row:hover { background: var(--bg2); }
     .proj-row:hover .proj-row-title { color: var(--accent); }
     .proj-row:hover .proj-n { color: var(--accent); }
-
-    .proj-n {
-      font-size: 11.5px;
-      font-weight: 400;
-      color: var(--dim);
-      padding-top: 3px;
-    }
-
-    .proj-row-body {}
-    .proj-row-domain {
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: .04em;
-      color: var(--dim);
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
+    .proj-n { font-size: 11.5px; font-weight: 400; color: var(--dim); padding-top: 3px; }
+    .proj-row-domain { font-size: 11px; font-weight: 400; letter-spacing: .04em; color: var(--dim); text-transform: uppercase; margin-bottom: 5px; }
+    .proj-row-domain .wip { color: var(--accent); }
     .proj-row-title {
-      font-family:'Instrument Sans',sans-serif; font-weight:700;
-      font-size: 20px;
-      font-weight: 400;
-      letter-spacing: -.01em;
-      color: var(--ink);
-      margin-bottom: 6px;
-      transition: color .15s;
+      font-family:'Instrument Sans',sans-serif; font-weight:400; font-size: 20px;
+      letter-spacing: -.01em; color: var(--ink); margin-bottom: 6px; transition: color .15s;
     }
-    .proj-row-desc {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--mid);
-      line-height: 1.65;
-      max-width: 460px;
-    }
+    .proj-row-desc { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.65; max-width: 460px; }
+    .proj-row-tools { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+    .t-chip { font-size: 11px; font-weight: 400; color: var(--dim); background: var(--bg2); padding: 3px 10px; border-radius: 3px; white-space: nowrap; }
 
-    .proj-row-tools {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
-    }
-    .t-chip {
-      font-size: 11px;
-      font-weight: 400;
-      color: var(--dim);
-      background: var(--bg2);
-      padding: 3px 10px;
-      border-radius: 3px;
-      white-space: nowrap;
-    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; }
+    .about-col h3 { font-size: 13.5px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+    .about-col p { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.75; }
 
-    /* ── ABOUT COLS ──────────────────────────────── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 48px;
-    }
-    .about-col h3 {
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 10px;
-    }
-    .about-col p {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--mid);
-      line-height: 1.75;
-    }
+    .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-top: 56px; }
+    .stat { background: var(--bg2); padding: 28px 24px; text-align: center; }
+    .stat-n { font-family:'Instrument Sans',sans-serif; font-weight:400; font-size: 38px; color: var(--ink); line-height: 1; margin-bottom: 6px; }
+    .stat-l { font-size: 12px; font-weight: 400; color: var(--dim); }
 
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      overflow: hidden;
-      margin-top: 56px;
-    }
-    .stat {
-      background: var(--bg2);
-      padding: 28px 24px;
-      text-align: center;
-    }
-    .stat-n {
-      font-family:'Instrument Sans',sans-serif; font-weight:700;
-      font-size: 38px;
-      font-weight: 400;
-      color: var(--ink);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .stat-l {
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--dim);
-    }
-
-    /* ── CONTACT ─────────────────────────────────── */
-    #contact {
-      border-top: 1px solid var(--line);
-      padding: 100px 40px;
-      max-width: 780px;
-      margin: 0 auto;
-    }
+    #contact { border-top: 1px solid var(--line); padding: 100px 40px; max-width: 780px; margin: 0 auto; }
     #contact .section-label { margin-bottom: 28px; }
-
-    .contact-heading {
-      font-family:'Instrument Sans',sans-serif; font-weight:700;
-      font-size: clamp(30px, 4vw, 48px);
-      font-weight: 400;
-      letter-spacing: -.02em;
-      line-height: 1.1;
-      color: var(--ink);
-      margin-bottom: 20px;
-      max-width: 440px;
-    }
-    .contact-sub {
-      font-size: 14.5px;
-      font-weight: 300;
-      color: var(--mid);
-      line-height: 1.75;
-      max-width: 380px;
-      margin-bottom: 40px;
-    }
+    .contact-heading { font-family:'Instrument Sans',sans-serif; font-weight:400; font-size: clamp(30px, 4vw, 48px); letter-spacing: -.02em; line-height: 1.1; color: var(--ink); margin-bottom: 20px; max-width: 440px; }
+    .contact-sub { font-size: 14.5px; font-weight: 300; color: var(--mid); line-height: 1.75; max-width: 380px; margin-bottom: 40px; }
     .contact-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
 
-    /* ── FOOTER ──────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    footer small { font-size: 12px; font-weight: 300; color: var(--dim); }
-    .f-links { display: flex; gap: 20px; }
-    .f-links a {
-      font-size: 12.5px; font-weight: 400;
-      color: var(--dim); text-decoration: none;
-      transition: color .15s;
-    }
-    .f-links a:hover { color: var(--ink); }
-
-    /* ── MOBILE ──────────────────────────────────── */
     @media (max-width: 680px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
       #hero, .section, #contact { padding-left: 20px; padding-right: 20px; }
       .tools-row { padding: 18px 20px; }
       .proj-row { grid-template-columns: 28px 1fr; }
       .proj-row-tools { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
       .stats-row { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 12px; padding: 20px; text-align: center; }
     }
-
-    /* ── DARK MODE ───────────────────────────────── */
-    html[data-theme="dark"] {
-      --ink: #f0ede4; --mid: #9a9790; --dim: #5c5a54;
-      --line: #2c2b26; --bg: #141412; --bg2: #1e1d1a; --accent: #f26419;
-    }
-    html[data-theme="dark"] nav { background: rgba(20,20,18,.92); }
-    .nav-right { display:flex; align-items:center; gap:16px; }
-    .theme-toggle {
-      background:none; border:none; cursor:pointer; color:var(--mid);
-      padding:2px; display:flex; align-items:center; transition:color .15s;
-    }
-    .theme-toggle:hover { color:var(--ink); }
-    .icon-sun  { display:none; }
-    .icon-moon { display:block; }
-    html[data-theme="dark"] .icon-sun  { display:block; }
-    html[data-theme="dark"] .icon-moon { display:none; }
   </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#hero" class="nav-logo">Your Name</a>
+  <a href="#hero" class="nav-logo" data-site-name="">Your Name</a>
   <ul class="nav-links">
     <li><a href="projects.html">Projects</a></li>
     <li><a href="#about">About</a></li>
@@ -471,9 +174,9 @@
     <a class="proj-row" href="Projects/healthcare.html">
       <span class="proj-n">02</span>
       <div class="proj-row-body">
-        <p class="proj-row-domain">Healthcare · Statistical Analysis</p>
+        <p class="proj-row-domain">Healthcare · Statistical Analysis <span class="wip">· In progress</span></p>
         <p class="proj-row-title">Hospital Readmission Analysis</p>
-        <p class="proj-row-desc">100K+ patient records analysed to surface clinical patterns behind 30-day readmissions.</p>
+        <p class="proj-row-desc">Planned: statistical testing (chi-square, Mann-Whitney) on the Diabetes 130-US dataset to surface factors behind 30-day readmissions.</p>
       </div>
       <div class="proj-row-tools">
         <span class="t-chip">Python</span>
@@ -485,9 +188,9 @@
     <a class="proj-row" href="Projects/finance.html">
       <span class="proj-n">03</span>
       <div class="proj-row-body">
-        <p class="proj-row-domain">Finance · Dashboard</p>
+        <p class="proj-row-domain">Finance · Dashboard <span class="wip">· In progress</span></p>
         <p class="proj-row-title">Investment Portfolio Risk Dashboard</p>
-        <p class="proj-row-desc">Live Streamlit dashboard — Sharpe Ratio, VaR, Max Drawdown, and correlation heatmap vs. S&P 500.</p>
+        <p class="proj-row-desc">Planned: a Streamlit dashboard computing Sharpe Ratio, VaR, Max Drawdown, and a correlation heatmap benchmarked against the S&P 500.</p>
       </div>
       <div class="proj-row-tools">
         <span class="t-chip">Streamlit</span>
@@ -499,9 +202,9 @@
     <a class="proj-row" href="Projects/retail.html">
       <span class="proj-n">04</span>
       <div class="proj-row-body">
-        <p class="proj-row-domain">Retail · Time Series</p>
+        <p class="proj-row-domain">Retail · Time Series <span class="wip">· In progress</span></p>
         <p class="proj-row-title">Walmart Sales Forecasting</p>
-        <p class="proj-row-desc">12-week demand forecast across 45 stores — 8.3% MAPE using Prophet and LightGBM.</p>
+        <p class="proj-row-desc">Planned: a 12-week demand forecast across 45 stores comparing SARIMA, Prophet, and LightGBM.</p>
       </div>
       <div class="proj-row-tools">
         <span class="t-chip">Prophet</span>
@@ -513,9 +216,9 @@
     <a class="proj-row" href="Projects/hr.html">
       <span class="proj-n">05</span>
       <div class="proj-row-body">
-        <p class="proj-row-domain">HR · People Analytics</p>
+        <p class="proj-row-domain">HR · People Analytics <span class="wip">· In progress</span></p>
         <p class="proj-row-title">Employee Attrition Analysis</p>
-        <p class="proj-row-desc">Random Forest + K-Means segmentation of 4,000 employees — three actionable HR interventions delivered.</p>
+        <p class="proj-row-desc">Planned: Random Forest flight-risk scoring plus K-Means segmentation on IBM HR data, ending in concrete HR interventions.</p>
       </div>
       <div class="proj-row-tools">
         <span class="t-chip">Python</span>
@@ -527,9 +230,9 @@
     <a class="proj-row" href="Projects/realestate.html">
       <span class="proj-n">06</span>
       <div class="proj-row-body">
-        <p class="proj-row-domain">Real Estate · Geospatial</p>
-        <p class="proj-row-title">Property Price Prediction & Mapping</p>
-        <p class="proj-row-desc">XGBoost regression on King County data with an interactive map flagging undervalued neighbourhoods.</p>
+        <p class="proj-row-domain">Real Estate · Geospatial <span class="wip">· In progress</span></p>
+        <p class="proj-row-title">Property Price Prediction &amp; Mapping</p>
+        <p class="proj-row-desc">Planned: XGBoost regression on King County data with an interactive folium map flagging under- and over-valued areas.</p>
       </div>
       <div class="proj-row-tools">
         <span class="t-chip">XGBoost</span>
@@ -541,9 +244,9 @@
     <a class="proj-row" href="Projects/sql.html">
       <span class="proj-n">07</span>
       <div class="proj-row-body">
-        <p class="proj-row-domain">E-commerce · SQL · BI</p>
+        <p class="proj-row-domain">E-commerce · SQL · BI <span class="wip">· In progress</span></p>
         <p class="proj-row-title">Olist Retail BI with SQL</p>
-        <p class="proj-row-desc">8 business queries across 8 relational tables — revenue trends, delivery KPIs, seller scorecards.</p>
+        <p class="proj-row-desc">Planned: eight business queries across Olist's 8-table schema using CTEs and window functions — revenue, delivery KPIs, seller scorecards.</p>
       </div>
       <div class="proj-row-tools">
         <span class="t-chip">PostgreSQL</span>
@@ -555,9 +258,9 @@
     <a class="proj-row" href="Projects/abtesting.html">
       <span class="proj-n">08</span>
       <div class="proj-row-body">
-        <p class="proj-row-domain">Marketing · A/B Testing</p>
-        <p class="proj-row-title">Checkout A/B Test & Attribution</p>
-        <p class="proj-row-desc">3.2% conversion lift confirmed (p = 0.003) — plus multi-touch attribution model by channel.</p>
+        <p class="proj-row-domain">Marketing · A/B Testing <span class="wip">· In progress</span></p>
+        <p class="proj-row-title">Checkout A/B Test &amp; Attribution</p>
+        <p class="proj-row-desc">Planned: a two-proportion z-test with a sample-ratio-mismatch check, plus a multi-touch attribution model by channel.</p>
       </div>
       <div class="proj-row-tools">
         <span class="t-chip">Python</span>
@@ -589,9 +292,9 @@
   </div>
 
   <div class="stats-row">
-    <div class="stat"><p class="stat-n">8</p><p class="stat-l">Projects</p></div>
+    <div class="stat"><p class="stat-n">1</p><p class="stat-l">Live project</p></div>
+    <div class="stat"><p class="stat-n">7</p><p class="stat-l">In progress</p></div>
     <div class="stat"><p class="stat-n">6</p><p class="stat-l">Industries</p></div>
-    <div class="stat"><p class="stat-n">10+</p><p class="stat-l">Tools &amp; Libraries</p></div>
   </div>
 </div>
 
@@ -601,33 +304,15 @@
   <h2 class="contact-heading">Let's work with your data.</h2>
   <p class="contact-sub">Open to full-time analyst roles, contract work, and freelance projects. I reply within 48 hours.</p>
   <div class="contact-links">
-    <a href="mailto:your@email.com" class="hl-primary">Send a message →</a>
-    <a href="https://linkedin.com/in/yourprofile" class="hl-secondary" target="_blank">LinkedIn ↗</a>
-    <a href="https://github.com/Iniisaac24" class="hl-secondary" target="_blank">GitHub ↗</a>
+    <a href="#" class="hl-primary" data-site-email>Send a message →</a>
+    <a href="#" class="hl-secondary" target="_blank" data-site-linkedin>LinkedIn ↗</a>
+    <a href="#" class="hl-secondary" target="_blank" data-site-github>GitHub ↗</a>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <small>© 2025 Your Name</small>
-  <div class="f-links">
-    <a href="https://github.com/Iniisaac24" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-    <a href="mailto:your@email.com">Email</a>
-  </div>
-</footer>
+<footer id="site-footer"></footer>
 
-<script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 10);
-  }, { passive: true });
-
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-  });
-</script>
+<script src="assets/site.js"></script>
 </body>
 </html>

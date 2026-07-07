@@ -4,85 +4,17 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Investment Portfolio Risk Dashboard — in progress" />
   <title>Portfolio Risk Dashboard — Your Name</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    :root{--ink:#111110;--mid:#4a4a47;--dim:#b8b8b4;--line:#e8e8e4;--bg:#ffffff;--bg2:#f7f7f5;--accent:#c4500a;}
-    html{scroll-behavior:smooth;}body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
-    nav{position:fixed;inset:0 0 auto 0;z-index:100;height:56px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .25s;}
-    nav.scrolled{border-bottom-color:var(--line);}
-    .nav-logo{font-size:14px;font-weight:500;text-decoration:none;color:var(--ink);}
-    .nav-back{font-size:13px;font-weight:400;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px;transition:color .15s,border-color .15s;}
-    .nav-back:hover{color:var(--ink);border-color:var(--mid);}
-    .hero{max-width:75vw;margin:0 auto;padding:110px 40px 60px;border-bottom:1px solid var(--line);}
-    .proj-label{font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
-    h1{font-family:'Instrument Sans',sans-serif; font-weight:700;font-size:clamp(32px,5vw,52px);font-weight:400;line-height:1.08;letter-spacing:-.02em;margin-bottom:20px;}
-    
-    .hero-sub{font-size:15px;font-weight:300;color:var(--mid);line-height:1.75;max-width:520px;margin-bottom:32px;}
-    .meta-row{display:flex;gap:32px;flex-wrap:wrap;}
-    .meta-label{font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:4px;}
-    .meta-value{font-size:13px;font-weight:400;color:var(--mid);}
-    .body{max-width:75vw;margin:0 auto;padding:0 40px 100px;}
-    .section{padding:56px 0;border-bottom:1px solid var(--line);}
-    .section:last-child{border-bottom:none;}
-    .section-label{font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
-    h2{font-family:'Instrument Sans',sans-serif; font-weight:700;font-size:26px;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;}
-    p{font-size:14px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:14px;}
-    p strong{font-weight:500;color:var(--ink);}
-    p:last-child{margin-bottom:0;}
-    .outcome-box{background:var(--bg2);border-left:2px solid var(--ink);padding:18px 20px;border-radius:0 6px 6px 0;margin:24px 0;}
-    .outcome-box p{font-size:13.5px;color:var(--ink);margin:0;}
-    .metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin:24px 0;}
-    .metric{background:var(--bg2);padding:22px 20px;}
-    .metric-label{font-size:10.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
-    .metric-value{font-family:'Instrument Sans',sans-serif; font-weight:700;font-size:28px;font-weight:400;color:var(--ink);line-height:1;}
-    .metric-sub{font-size:11.5px;font-weight:300;color:var(--mid);margin-top:5px;}
-    .steps{display:flex;flex-direction:column;}
-    .step{display:grid;grid-template-columns:28px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);}
-    .step:last-child{border-bottom:none;}
-    .step-n{font-size:11px;font-weight:400;color:var(--dim);padding-top:2px;}
-    .step-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px;}
-    .step-desc{font-size:13px;font-weight:300;color:var(--mid);line-height:1.7;}
-    .findings{display:flex;flex-direction:column;gap:12px;margin-top:8px;}
-    .finding{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:baseline;}
-    .f-bullet{width:5px;height:5px;border-radius:50%;background:var(--dim);margin-top:7px;}
-    .f-text{font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.7;}
-    .f-text strong{font-weight:500;color:var(--ink);}
-    pre{background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:20px;overflow-x:auto;margin:20px 0;}
-    code.hljs{background:transparent;font-size:12.5px;line-height:1.65;font-family:'Geist Mono','Fira Code',monospace;}
-    code:not(.hljs){font-size:12px;background:var(--bg2);border:1px solid var(--line);padding:2px 7px;border-radius:3px;font-family:monospace;color:var(--ink);}
-    .tools-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
-    .t-chip{font-size:11.5px;font-weight:400;color:var(--mid);background:var(--bg2);padding:5px 12px;border-radius:3px;}
-    .proj-nav{display:flex;justify-content:space-between;align-items:center;padding:40px 0 0;}
-    .pn-link{font-size:13px;font-weight:400;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px;transition:color .15s,border-color .15s;}
-    .pn-link:hover{color:var(--ink);border-color:var(--mid);}
-    .pn-link.primary{color:var(--ink);border-bottom:1.5px solid var(--ink);font-weight:500;}
-    .pn-link.primary:hover{opacity:.55;}
-    footer{border-top:1px solid var(--line);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;}
-    footer small{font-size:12px;font-weight:300;color:var(--dim);}
-    .f-links{display:flex;gap:20px;}
-    .f-links a{font-size:12.5px;font-weight:400;color:var(--dim);text-decoration:none;transition:color .15s;}
-    .f-links a:hover{color:var(--ink);}
-    @media(max-width:900px){nav{padding:0 20px;}.hero,.body{padding-left:20px;padding-right:20px;}.metrics-grid{grid-template-columns:1fr;}footer{flex-direction:column;gap:12px;padding:20px;text-align:center;}}
-
-    /* ── DARK MODE ───────────────────────────────── */
-    html[data-theme="dark"]{--ink:#f0ede4;--mid:#9a9790;--dim:#5c5a54;--line:#2c2b26;--bg:#141412;--bg2:#1e1d1a;--accent:#f26419;}
-    html[data-theme="dark"] nav{background:rgba(20,20,18,.92);}
-    .nav-right{display:flex;align-items:center;gap:16px;}
-    .theme-toggle{background:none;border:none;cursor:pointer;color:var(--mid);padding:2px;display:flex;align-items:center;transition:color .15s;}
-    .theme-toggle:hover{color:var(--ink);}
-    .icon-sun{display:none;}.icon-moon{display:block;}
-    html[data-theme="dark"] .icon-sun{display:block;}html[data-theme="dark"] .icon-moon{display:none;}
-    .meta-link{color:var(--mid);border-bottom:1px solid var(--line);text-decoration:none;transition:color .15s;}
-    .meta-link:hover{color:var(--ink);}
-  </style>
+  <link rel="stylesheet" href="../assets/theme.css" />
+  <link rel="stylesheet" href="../assets/project.css" />
 </head>
-<body>
+<body data-base="..">
+
 <nav id="nav">
-  <a href="../index.html" class="nav-logo">Your Name</a>
+  <a href="../index.html" class="nav-logo" data-site-name="">Your Name</a>
   <div class="nav-right">
     <a href="../projects.html" class="nav-back">← All Projects</a>
     <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
@@ -92,137 +24,39 @@
 <header class="hero">
   <p class="proj-label">Project 03 · Finance · Risk Analytics</p>
   <h1>Investment Portfolio<br>Risk Dashboard</h1>
-  <p class="hero-sub">A live Streamlit dashboard tracking risk-adjusted performance, downside exposure, and sector concentration for a 15-stock portfolio — updated daily from market data.</p>
-  <div class="meta-row">
-    <div class="meta-item"><p class="meta-label">Data Source</p><p class="meta-value">yfinance + FRED API (live)</p></div>
-    <div class="meta-item"><p class="meta-label">Holdings</p><p class="meta-value">15 stocks, 4 sectors, 3-year window</p></div>
-    <div class="meta-item"><p class="meta-label">Live Demo</p><p class="meta-value"><a href="https://your-app.streamlit.app" target="_blank" rel="noopener noreferrer" class="meta-link">Streamlit ↗</a></p></div>
-    <div class="meta-item"><p class="meta-label">Code</p><p class="meta-value"><a href="https://github.com/Iniisaac24/portfolio-risk" target="_blank" rel="noopener noreferrer" class="meta-link">GitHub ↗</a></p></div>
-  </div>
+  <span class="status-badge"><span class="s-dot wip"></span>In progress</span>
+  <p class="hero-sub">A Streamlit dashboard that quantifies portfolio risk from live market data and benchmarks it against the S&amp;P 500 — Sharpe Ratio, Value at Risk, Max Drawdown, and sector correlation in one view.</p>
 </header>
 
 <div class="body">
-
   <div class="section">
-    <p class="section-label">The Problem</p>
-    <h2>Managing risk you can actually see</h2>
-    <p>Most retail investors track returns obsessively but don't measure risk in any structured way. A portfolio that has outperformed the S&P 500 by 3% might have done so by taking on significantly more downside exposure — which only becomes visible during a correction.</p>
-    <p>This dashboard was built to answer the questions a risk-aware investor asks every month: <strong>Am I being compensated for the risk I'm taking? Where is my concentration risk hiding? What's my realistic worst-day scenario?</strong></p>
-    <div class="outcome-box">
-      <p><strong>Key finding:</strong> Three stock pairs with correlation above 0.85 identified — all within the tech sector. The portfolio's apparent diversification across 15 names was masking significant concentration risk in a single factor.</p>
-    </div>
-  </div>
-
-  <div class="section">
-    <p class="section-label">Key Metrics</p>
-    <h2>Risk summary</h2>
-    <div class="metrics-grid">
-      <div class="metric"><p class="metric-label">Sharpe Ratio</p><p class="metric-value">1.24</p><p class="metric-sub">Risk-adjusted return vs T-Bill</p></div>
-      <div class="metric"><p class="metric-label">VaR (95%)</p><p class="metric-value">−1.8%</p><p class="metric-sub">Worst expected day, 95% confidence</p></div>
-      <div class="metric"><p class="metric-label">Max Drawdown</p><p class="metric-value">−18.3%</p><p class="metric-sub">Peak-to-trough decline, 3yr window</p></div>
-      <div class="metric"><p class="metric-label">Beta</p><p class="metric-value">1.12</p><p class="metric-sub">Vs S&amp;P 500 benchmark</p></div>
-      <div class="metric"><p class="metric-label">Ann. Volatility</p><p class="metric-value">19.4%</p><p class="metric-sub">Annualised standard deviation</p></div>
-      <div class="metric"><p class="metric-label">Jensen's Alpha</p><p class="metric-value">+2.1%</p><p class="metric-sub">Excess return over CAPM</p></div>
-    </div>
-    <p style="font-size:12px;color:var(--dim);margin-top:8px;">* Values shown are illustrative from a sample 3-year backtest. Live dashboard reflects current market data.</p>
-  </div>
-
-  <div class="section">
-    <p class="section-label">Process</p>
-    <h2>From price data to risk dashboard</h2>
+    <p class="section-label">Planned Approach</p>
+    <h2>What this project will cover</h2>
     <div class="steps">
-      <div class="step"><span class="step-n">01</span><div><p class="step-title">Live data ingestion</p><p class="step-desc">yfinance pulls 3 years of adjusted closing prices for all 15 tickers plus the S&P 500 benchmark. The risk-free rate is pulled directly from FRED's DTB3 series (3-month Treasury Bill) — refreshed daily. No static CSV files anywhere in the pipeline.</p></div></div>
-      <div class="step"><span class="step-n">02</span><div><p class="step-title">Returns and annualisation</p><p class="step-desc">Daily percentage returns calculated with <code>pct_change()</code>. Portfolio daily return is the weighted sum across all holdings (equal-weight by default, adjustable in the dashboard). Annualised using 252 trading days.</p></div></div>
-      <div class="step"><span class="step-n">03</span><div><p class="step-title">Risk metrics</p><p class="step-desc">Sharpe Ratio uses the live T-Bill rate as the risk-free rate. VaR calculated by historical simulation — the 5th percentile of actual daily returns. Max Drawdown computed as the largest percentage fall from any rolling peak in the period.</p></div></div>
-      <div class="step"><span class="step-n">04</span><div><p class="step-title">Correlation analysis</p><p class="step-desc">Full pairwise correlation matrix across all holdings. Any pair with correlation above 0.85 is flagged as concentration risk. This is visualised as a heatmap with the diagonal masked for clarity.</p></div></div>
-      <div class="step"><span class="step-n">05</span><div><p class="step-title">Streamlit deployment</p><p class="step-desc">The entire pipeline runs inside a Streamlit app deployed on Streamlit Community Cloud — free hosting, auto-deploys from the GitHub repo on every push. Data refreshes on page load.</p></div></div>
+      <div class="step"><span class="step-n">01</span><div><p class="step-title">Live data</p><p class="step-desc">Pull daily prices for ~15 holdings via yfinance and compute a clean returns series.</p></div></div>
+      <div class="step"><span class="step-n">02</span><div><p class="step-title">Risk metrics</p><p class="step-desc">Sharpe Ratio, 95% historical VaR, and Maximum Drawdown, each benchmarked against the S&amp;P 500.</p></div></div>
+      <div class="step"><span class="step-n">03</span><div><p class="step-title">Concentration risk</p><p class="step-desc">A sector correlation heatmap to surface holdings that move together and undermine diversification.</p></div></div>
+      <div class="step"><span class="step-n">04</span><div><p class="step-title">Ship it</p><p class="step-desc">Package as an interactive Streamlit app — this page will show screenshots plus a launch link once it is deployed.</p></div></div>
     </div>
   </div>
 
   <div class="section">
-    <p class="section-label">Key Code</p>
-    <h2>Sharpe Ratio + VaR calculation</h2>
-    <pre><code class="language-python">import yfinance as yf
-import numpy as np
-import pandas as pd
-
-# Pull risk-free rate from FRED
-fred_url = "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DTB3"
-rf_annual = pd.read_csv(fred_url, index_col='DATE').replace('.', np.nan).astype(float).ffill().iloc[-1, 0] / 100
-rf_daily  = rf_annual / 252
-
-# Portfolio daily returns (equal-weight)
-prices       = yf.download(tickers, period='3y', auto_adjust=True, progress=False)['Close']
-daily_rets   = prices.pct_change().dropna()
-port_daily   = daily_rets.mean(axis=1)   # equal weight
-
-# Sharpe Ratio
-excess       = port_daily - rf_daily
-sharpe       = (excess.mean() / excess.std()) * np.sqrt(252)
-
-# Value at Risk — Historical Simulation
-var_95       = np.percentile(port_daily, 5)
-
-# Max Drawdown
-cum_ret      = (1 + port_daily).cumprod()
-max_drawdown = ((cum_ret - cum_ret.cummax()) / cum_ret.cummax()).min()
-
-print(f"Sharpe: {sharpe:.3f}  |  VaR(95%): {var_95:.2%}  |  Max DD: {max_drawdown:.2%}")</code></pre>
-  </div>
-
-  <div class="section">
-    <p class="section-label">Findings</p>
-    <h2>What the dashboard revealed</h2>
-    <div class="findings">
-      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>The portfolio outperformed the S&P 500 over the 3-year period</strong>, but with a Beta of 1.12 — meaning it amplified market moves. The Sharpe Ratio of 1.24 is above the commonly cited 1.0 threshold, suggesting the excess return justified the additional risk.</p></div>
-      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Three stock pairs flagged for concentration risk</strong>: AAPL↔MSFT (0.91), AAPL↔NVDA (0.87), MSFT↔GOOGL (0.86). Despite having 15 names, the tech sector behaves like a single factor in downturns. Recommended action: replace one tech holding with a low-correlation asset.</p></div>
-      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>VaR of −1.8% at 95% confidence</strong> means in the worst 5% of trading days, the portfolio loses at least 1.8% of its value. The CVaR (conditional VaR) is −2.6% — this is the average loss on those worst days, giving a more conservative stress scenario.</p></div>
-      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>The maximum drawdown of −18.3%</strong> occurred during the 2022 rate-hike cycle. The portfolio recovered faster than the benchmark due to energy sector holdings (XOM, CVX) which appreciated during the inflationary period — demonstrating meaningful sector diversification despite the tech concentration.</p></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <p class="section-label">Tools & Libraries</p>
-    <h2>Stack</h2>
+    <p class="section-label">Tools &amp; Libraries</p>
+    <h2>Planned stack</h2>
     <div class="tools-wrap">
-      <span class="t-chip">Python 3.11</span><span class="t-chip">yfinance</span>
-      <span class="t-chip">pandas</span><span class="t-chip">NumPy</span>
-      <span class="t-chip">Streamlit</span><span class="t-chip">Plotly</span>
-      <span class="t-chip">seaborn</span><span class="t-chip">FRED API</span>
-      <span class="t-chip">Streamlit Community Cloud</span>
+      <span class="t-chip">Streamlit</span><span class="t-chip">yfinance</span>
+      <span class="t-chip">NumPy</span><span class="t-chip">pandas</span>
+      <span class="t-chip">Plotly</span>
     </div>
   </div>
 
   <div class="proj-nav">
-    <a href="healthcare.html" class="pn-link">← Project 02: Healthcare</a>
-    <a href="retail.html" class="pn-link primary">Next: Sales Forecasting →</a>
+    <a href="../projects.html" class="pn-link">← All Projects</a>
+    <a href="churn.html" class="pn-link primary">See a completed project: Churn →</a>
   </div>
 </div>
 
-<footer>
-  <small>© 2025 Your Name</small>
-  <div class="f-links">
-    <a href="https://github.com/Iniisaac24" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-    <a href="mailto:your@email.com">Email</a>
-  </div>
-</footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script>
-  hljs.highlightAll();
-  const nav=document.getElementById('nav');
-  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>10);},{passive:true});
-  document.getElementById('themeToggle').addEventListener('click',()=>{
-    const next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
-    document.documentElement.setAttribute('data-theme',next);
-    localStorage.setItem('theme',next);
-    const hl=document.getElementById('hljs-theme');
-    hl.href=next==='dark'
-      ?'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css'
-      :'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
-  });
-  if(document.documentElement.getAttribute('data-theme')==='dark')
-    document.getElementById('hljs-theme').href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
-</script>
+<footer id="site-footer"></footer>
+<script src="../assets/site.js"></script>
 </body>
 </html>

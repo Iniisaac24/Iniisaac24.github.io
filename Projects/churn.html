@@ -118,10 +118,10 @@
     .meta-link:hover { color:var(--ink); }
   </style>
 </head>
-<body>
+<body data-base="..">
 
 <nav id="nav">
-  <a href="../index.html" class="nav-logo">Your Name</a>
+  <a href="../index.html" class="nav-logo" data-site-name="">Your Name</a>
   <div class="nav-right">
     <a href="../projects.html" class="nav-back">← All Projects</a>
     <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
@@ -249,34 +249,10 @@ print(f"Net benefit: ${net_benefit:,.0f}  |  ROI: {net_benefit/(len(high_risk)*o
 
 </div>
 
-<footer>
-  <small>© 2025 Your Name</small>
-  <div class="f-links">
-    <a href="https://github.com/Iniisaac24" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-    <a href="mailto:your@email.com">Email</a>
-  </div>
-</footer>
+<footer id="site-footer"></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script>
-  hljs.highlightAll();
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    const hl = document.getElementById('hljs-theme');
-    hl.href = next === 'dark'
-      ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css'
-      : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
-  });
-  // sync hljs theme on load
-  if (document.documentElement.getAttribute('data-theme') === 'dark') {
-    document.getElementById('hljs-theme').href =
-      'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
-  }
-</script>
+<script>hljs.highlightAll();</script>
+<script src="../assets/site.js"></script>
 </body>
 </html>
