@@ -5,11 +5,10 @@
    ───────────────────────────────────────────────────────── */
 
 const SITE = {
-  name:     'Your Name',
-  email:    'your@email.com',
-  linkedin: 'https://linkedin.com/in/yourprofile',
+  name:     'Ini Isaac Aniefiok',
+  email:    'iniisaac20@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/ini-isaac-a961b022a',
   github:   'https://github.com/Iniisaac24',
-  year:     2025,
 };
 
 (function () {
@@ -26,7 +25,7 @@ const SITE = {
   const foot = document.getElementById('site-footer');
   if (foot) {
     foot.innerHTML =
-      '<small>© ' + SITE.year + ' ' + SITE.name + '</small>' +
+      '<small>© ' + (new Date().getFullYear()) + ' ' + SITE.name + '</small>' +
       '<div class="f-links">' +
         '<a href="' + SITE.github + '" target="_blank" rel="noopener">GitHub</a>' +
         '<a href="' + SITE.linkedin + '" target="_blank" rel="noopener">LinkedIn</a>' +
