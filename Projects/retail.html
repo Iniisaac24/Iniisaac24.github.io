@@ -4,12 +4,36 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Walmart Sales Forecasting — in progress" />
+  <meta name="description" content="Walmart Sales Forecasting — 12-week demand forecast across 45 stores" />
   <title>Walmart Sales Forecasting — Ini Isaac Aniefiok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/theme.css" />
   <link rel="stylesheet" href="../assets/project.css" />
+  <style>
+    .links-row { display:flex; gap:16px; flex-wrap:wrap; margin-top:22px; }
+    .btn-link { font-size:13px; font-weight:500; color:var(--ink); text-decoration:none; border:1px solid var(--line); border-radius:5px; padding:8px 16px; transition:border-color .15s,color .15s; }
+    .btn-link:hover { border-color:var(--mid); }
+    .btn-link.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .btn-link.primary:hover { opacity:.88; }
+    .findings { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+    .finding { display:grid; grid-template-columns:20px 1fr; gap:12px; align-items:baseline; }
+    .f-bullet { width:5px; height:5px; border-radius:50%; background:var(--accent); margin-top:7px; }
+    .f-text { font-size:13.5px; font-weight:300; color:var(--mid); line-height:1.7; }
+    .f-text strong { font-weight:500; color:var(--ink); }
+    .stat-band { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:8px; }
+    .sb { background:var(--bg2); padding:20px 16px; text-align:center; }
+    .sb-n { font-family:'Instrument Sans',sans-serif; font-size:24px; color:var(--ink); }
+    .sb-l { font-size:11px; color:var(--dim); margin-top:4px; }
+    figure { margin-top:20px; }
+    figure img { width:100%; border:1px solid var(--line); border-radius:8px; }
+    figure figcaption { font-size:12px; color:var(--dim); margin-top:8px; }
+    table.mt { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
+    table.mt th, table.mt td { text-align:left; padding:8px 12px; border-bottom:1px solid var(--line); color:var(--mid); }
+    table.mt th { color:var(--dim); font-weight:500; font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
+    table.mt td strong { color:var(--ink); }
+    @media (max-width:640px){ .stat-band { grid-template-columns:1fr 1fr; } }
+  </style>
 </head>
 <body data-base="..">
 
@@ -24,34 +48,82 @@
 <header class="hero">
   <p class="proj-label">Project 04 · Retail · Time Series</p>
   <h1>Walmart Sales Forecasting</h1>
-  <span class="status-badge"><span class="s-dot wip"></span>In progress</span>
-  <p class="hero-sub">A 12-week demand forecast across 45 stores, comparing a classical baseline against gradient-boosted models — the kind of forecast that drives inventory and staffing decisions.</p>
+  <span class="status-badge"><span class="s-dot"></span>Complete</span>
+  <p class="hero-sub">Forecasting the next 12 weeks of weekly sales across 45 stores and 81 departments — 421,570 weekly records, three competing models, evaluated honestly on a held-out window.</p>
+  <div class="links-row">
+    <a class="btn-link primary" href="https://github.com/Iniisaac24/sales-forecasting/blob/main/sales_forecasting.ipynb" target="_blank" rel="noopener">View the notebook ↗</a>
+    <a class="btn-link" href="https://github.com/Iniisaac24/sales-forecasting" target="_blank" rel="noopener">GitHub repo ↗</a>
+  </div>
 </header>
 
 <div class="body">
   <div class="section">
-    <p class="section-label">Planned Approach</p>
-    <h2>What this project will cover</h2>
-    <div class="steps">
-      <div class="step"><span class="step-n">01</span><div><p class="step-title">Assemble the series</p><p class="step-desc">Build weekly sales per store with holiday flags and markdown features.</p></div></div>
-      <div class="step"><span class="step-n">02</span><div><p class="step-title">Classical baseline</p><p class="step-desc">SARIMA for a transparent baseline, then Prophet for automatic holiday and seasonality handling.</p></div></div>
-      <div class="step"><span class="step-n">03</span><div><p class="step-title">Gradient-boosted challenger</p><p class="step-desc">Engineer lag and rolling-window features for a LightGBM model to beat the baseline.</p></div></div>
-      <div class="step"><span class="step-n">04</span><div><p class="step-title">Honest evaluation</p><p class="step-desc">Compare all three on a held-out 12-week window using MAPE, not in-sample fit.</p></div></div>
+    <p class="section-label">Headline</p>
+    <div class="stat-band">
+      <div class="sb"><div class="sb-n">45</div><div class="sb-l">stores · 81 depts</div></div>
+      <div class="sb"><div class="sb-n">421,570</div><div class="sb-l">weekly records</div></div>
+      <div class="sb"><div class="sb-n">1.37%</div><div class="sb-l">company MAPE (LightGBM)</div></div>
+      <div class="sb"><div class="sb-n">7.79%</div><div class="sb-l">store-dept wMAPE</div></div>
     </div>
   </div>
 
   <div class="section">
-    <p class="section-label">Tools &amp; Libraries</p>
-    <h2>Planned stack</h2>
-    <div class="tools-wrap">
-      <span class="t-chip">Prophet</span><span class="t-chip">LightGBM</span>
-      <span class="t-chip">statsmodels</span><span class="t-chip">pandas</span>
+    <p class="section-label">Model comparison · 12-week holdout</p>
+    <h2>Three models, one honest scoreboard</h2>
+    <table class="mt">
+      <tr><th>Model</th><th>Company MAE</th><th>Company MAPE</th></tr>
+      <tr><td>Seasonal-naive (52-wk lag)</td><td>$974,642</td><td>2.12%</td></tr>
+      <tr><td>Holt-Winters</td><td>$722,921</td><td>1.56%</td></tr>
+      <tr><td><strong>LightGBM</strong></td><td><strong>$621,359</strong></td><td><strong>1.37%</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Approach</p>
+    <h2>From weekly sales to a scored forecast</h2>
+    <div class="steps">
+      <div class="step"><span class="step-n">01</span><div><p class="step-title">Assemble features</p><p class="step-desc">Joined store × department weekly sales to economic features (temperature, fuel price, CPI, unemployment, markdowns) and store metadata (type, size).</p></div></div>
+      <div class="step"><span class="step-n">02</span><div><p class="step-title">Baselines</p><p class="step-desc">Seasonal-naive (52-week lag) and Holt-Winters additive trend + yearly seasonality on the company total.</p></div></div>
+      <div class="step"><span class="step-n">03</span><div><p class="step-title">LightGBM</p><p class="step-desc">Lag features (1, 2, 4, 52 weeks) and rolling means at store-department level, scored with weighted MAPE — robust to the many near-zero department sales that break plain MAPE.</p></div></div>
     </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Findings</p>
+    <h2>Yearly seasonality is the whole game</h2>
+    <div class="findings">
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>LightGBM wins at every level</strong> — 1.37% MAPE on the company aggregate and 7.79% weighted MAPE at store-department granularity, the level that actually drives inventory decisions.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>The 52-week lag and week-of-year are the top predictors</strong> — the Thanksgiving/Christmas spike is the dominant seasonal signal, with recent-week momentum (<code>lag_1</code>) close behind.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>The aggregate is deceptively easy.</strong> Even a seasonal-naive baseline reaches ~2% on the smooth company total — so the granular store-department task is where modelling earns its keep.</p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Evidence</p>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/sales-forecasting/main/figures/forecast_vs_actual.png" alt="12-week forecast vs actual" />
+      <figcaption>Company-wide weekly sales with the 12-week forecast (dotted line = holdout start).</figcaption>
+    </figure>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/sales-forecasting/main/figures/feature_importance.png" alt="LightGBM feature importance" />
+      <figcaption>LightGBM feature importance — yearly lag and week-of-year dominate.</figcaption>
+    </figure>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Tools &amp; Data</p>
+    <h2>Stack</h2>
+    <div class="tools-wrap">
+      <span class="t-chip">Python</span><span class="t-chip">pandas</span>
+      <span class="t-chip">statsmodels</span><span class="t-chip">LightGBM</span>
+      <span class="t-chip">scikit-learn</span><span class="t-chip">matplotlib</span>
+    </div>
+    <p style="font-size:13px;color:var(--mid);margin-top:16px;line-height:1.7;">Data: <a href="https://www.kaggle.com/datasets/aslanahmedov/walmart-sales-forecast" target="_blank" rel="noopener" style="color:var(--accent);">Walmart Store Sales Forecasting</a> — 45 stores, 2010–2012.</p>
   </div>
 
   <div class="proj-nav">
     <a href="../projects.html" class="pn-link">← All Projects</a>
-    <a href="churn.html" class="pn-link primary">See a completed project: Churn →</a>
+    <a href="finance.html" class="pn-link primary">Another completed project: Finance →</a>
   </div>
 </div>
 
