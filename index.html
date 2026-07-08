@@ -36,7 +36,7 @@
     h1 .accent { color: var(--accent); }
     h1 i { font-style: italic; color: var(--mid); }
 
-    .hero-body { font-size: 16px; font-weight: 300; color: var(--mid); line-height: 1.75; max-width: 420px; margin-bottom: 44px; }
+    .hero-body { font-size: 16.5px; font-weight: 400; color: var(--mid); line-height: 1.75; max-width: 600px; margin-bottom: 44px; }
 
     .hero-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
     h1 .hl-g { color: #16a34a; }
@@ -95,7 +95,12 @@
     .work-muted { color: var(--dim); font-weight: 400; }
     .work-link { font-size: 13px; font-weight: 500; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; }
     .work-card:hover .work-link { color: var(--accent); gap: 10px; }
-    .work-card.spotlight { border: 1px solid var(--line); margin-top: 20px; }
+    .work-card.spotlight { background: #ffffff; border: 1px solid var(--line); margin-bottom: 44px; }
+    .work-card.spotlight .work-cat { color: var(--accent); }
+    .work-card.spotlight .work-title { color: #14130f; }
+    .work-card.spotlight .work-muted { color: #6b6862; }
+    .work-card.spotlight .work-link { color: var(--accent); }
+    .work-card.spotlight:hover { background: #ffffff; }
 
     .about-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; }
     .about-col h3 { font-size: 13.5px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
@@ -114,7 +119,7 @@
     #contact { border-top: 1px solid var(--line); padding: 100px 40px; max-width: 80vw; margin: 0 auto; }
     #contact .section-label { margin-bottom: 28px; }
     .contact-heading { font-family:'Instrument Sans',sans-serif; font-weight:600; font-size: clamp(42px, 6vw, 78px); letter-spacing: -.02em; line-height: 1.05; color: var(--ink); margin-bottom: 20px; max-width: 760px; }
-    .contact-sub { font-size: 14.5px; font-weight: 300; color: var(--mid); line-height: 1.75; max-width: 380px; margin-bottom: 40px; }
+    .contact-sub { font-size: 16px; font-weight: 400; color: var(--mid); line-height: 1.75; max-width: 600px; margin-bottom: 40px; }
     .contact-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
 
     @media (max-width: 680px) {
@@ -138,7 +143,7 @@
   <a href="#hero" class="nav-logo" data-site-name="">Ini Isaac Aniefiok</a>
   <ul class="nav-links">
     <li><a href="projects.html">Projects</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
@@ -178,8 +183,15 @@
   </div>
 </div>
 
-<!-- PROJECTS -->
+<!-- SPOTLIGHT + PROJECTS -->
 <div class="section" id="projects">
+  <p class="section-label section-label--strong">Spotlight project</p>
+  <a class="work-card spotlight" href="Projects/churn.html">
+    <p class="work-cat">Telecom · Predictive Analytics</p>
+    <h3 class="work-title">Customer Churn Prediction. <span class="work-muted">XGBoost flags at-risk customers at 0.84 AUC and 76% recall, with SHAP explaining every driver.</span></h3>
+    <span class="work-link">View project →</span>
+  </a>
+
   <div class="work-grid">
 
     <a class="work-card" href="Projects/churn.html">
@@ -230,34 +242,6 @@
       <span class="work-link">View project →</span>
     </a>
 
-  </div>
-</div>
-
-<!-- ABOUT -->
-<div class="section" id="about">
-  <p class="section-label">About</p>
-
-  <div class="about-bio">
-    <div class="about-text">
-      <p>Meet Ini, a Chess lover, with a strong background in User Experience design. I'm a Data Analyst with proven expertise in problem-solving, research and analytics, systems design, EDA directed towards business growth and Machine Learning techniques. I help businesses uncover trends and insights from data for business strategy and growth.</p>
-      <p>I'm also a big lover of love and music, with a newly found interest in spoken words.</p>
-    </div>
-    <div class="about-photo">
-      <img src="assets/portrait.jpg" alt="Ini Isaac Aniefiok" />
-    </div>
-  </div>
-
-  <p class="section-label" style="margin-top: 56px;">Spotlight project</p>
-  <a class="work-card spotlight" href="Projects/churn.html">
-    <p class="work-cat">Telecom · Predictive Analytics</p>
-    <h3 class="work-title">Customer Churn Prediction. <span class="work-muted">XGBoost flags at-risk customers at 0.84 AUC and 76% recall, with SHAP explaining every driver.</span></h3>
-    <span class="work-link">View project →</span>
-  </a>
-
-  <div class="stats-row">
-    <div class="stat"><p class="stat-n">8</p><p class="stat-l">Live projects</p></div>
-    <div class="stat"><p class="stat-n">8</p><p class="stat-l">GitHub repos</p></div>
-    <div class="stat"><p class="stat-n">6</p><p class="stat-l">Industries</p></div>
   </div>
 </div>
 
