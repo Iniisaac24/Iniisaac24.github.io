@@ -101,6 +101,16 @@
     .work-card.spotlight .work-muted { color: #6b6862; }
     .work-card.spotlight .work-link { color: var(--accent); }
     .work-card.spotlight:hover { background: #ffffff; }
+    .work-card.spotlight { gap: 16px; }
+    .sp-title { font-family:'Instrument Sans',sans-serif; font-size: 30px; font-weight: 600; letter-spacing: -.01em; line-height: 1.15; color: #14130f; }
+    .sp-desc { font-size: 15px; font-weight: 400; color: #55524c; line-height: 1.7; max-width: 640px; }
+    .sp-metrics { display: flex; flex-wrap: wrap; gap: 30px; margin: 4px 0; }
+    .sp-metrics div { display: flex; flex-direction: column; }
+    .sp-metrics b { font-family:'Instrument Sans',sans-serif; font-size: 24px; font-weight: 600; color: #14130f; line-height: 1; }
+    .sp-metrics span { font-size: 10.5px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: #8a877f; margin-top: 5px; }
+    .sp-foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 4px; }
+    .sp-tools { display: flex; gap: 8px; flex-wrap: wrap; }
+    .work-card.spotlight .t-chip { background: #f2efe9; color: #6b6862; }
 
     .about-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; }
     .about-col h3 { font-size: 13.5px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
@@ -188,8 +198,20 @@
   <p class="section-label section-label--strong">Spotlight project</p>
   <a class="work-card spotlight" href="Projects/churn.html">
     <p class="work-cat">Telecom · Predictive Analytics</p>
-    <h3 class="work-title">Customer Churn Prediction. <span class="work-muted">XGBoost flags at-risk customers at 0.84 AUC and 76% recall, with SHAP explaining every driver.</span></h3>
-    <span class="work-link">View project →</span>
+    <h3 class="sp-title">Customer Churn Prediction</h3>
+    <p class="sp-desc">XGBoost (AUC 0.84, 76% recall) identifies at-risk customers across 7,043 telecom records — the top churn drivers are contract type, tenure, and service tier. A SHAP explainability layer turns every prediction into a specific reason, so the retention team knows exactly who to target and why.</p>
+    <div class="sp-metrics">
+      <div><b>0.84</b><span>AUC-ROC</span></div>
+      <div><b>76%</b><span>Churn recall</span></div>
+      <div><b>7,043</b><span>Customers</span></div>
+      <div><b>~$52K</b><span>Projected saving</span></div>
+    </div>
+    <div class="sp-foot">
+      <div class="sp-tools">
+        <span class="t-chip">Python</span><span class="t-chip">XGBoost</span><span class="t-chip">SHAP</span><span class="t-chip">scikit-learn</span><span class="t-chip">pandas</span>
+      </div>
+      <span class="work-link">View project →</span>
+    </div>
   </a>
 
   <div class="work-grid">
