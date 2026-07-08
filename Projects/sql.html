@@ -4,12 +4,37 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Olist Retail BI with SQL — in progress" />
+  <meta name="description" content="Olist Retail BI with SQL — 8 business queries across an 8-table e-commerce schema" />
   <title>Olist Retail BI with SQL — Ini Isaac Aniefiok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/theme.css" />
   <link rel="stylesheet" href="../assets/project.css" />
+  <style>
+    .links-row { display:flex; gap:16px; flex-wrap:wrap; margin-top:22px; }
+    .btn-link { font-size:13px; font-weight:500; color:var(--ink); text-decoration:none; border:1px solid var(--line); border-radius:5px; padding:8px 16px; transition:border-color .15s,color .15s; }
+    .btn-link:hover { border-color:var(--mid); }
+    .btn-link.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .btn-link.primary:hover { opacity:.88; }
+    .findings { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+    .finding { display:grid; grid-template-columns:20px 1fr; gap:12px; align-items:baseline; }
+    .f-bullet { width:5px; height:5px; border-radius:50%; background:var(--accent); margin-top:7px; }
+    .f-text { font-size:13.5px; font-weight:300; color:var(--mid); line-height:1.7; }
+    .f-text strong { font-weight:500; color:var(--ink); }
+    .stat-band { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:8px; }
+    .sb { background:var(--bg2); padding:20px 16px; text-align:center; }
+    .sb-n { font-family:'Instrument Sans',sans-serif; font-size:23px; color:var(--ink); }
+    .sb-l { font-size:11px; color:var(--dim); margin-top:4px; }
+    figure { margin-top:20px; }
+    figure img { width:100%; border:1px solid var(--line); border-radius:8px; }
+    figure figcaption { font-size:12px; color:var(--dim); margin-top:8px; }
+    table.mt { width:100%; border-collapse:collapse; margin-top:12px; font-size:12.5px; }
+    table.mt th, table.mt td { text-align:left; padding:8px 12px; border-bottom:1px solid var(--line); color:var(--mid); }
+    table.mt th { color:var(--dim); font-weight:500; font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
+    table.mt td strong { color:var(--ink); }
+    table.mt code { font-size:11.5px; background:var(--bg2); padding:1px 6px; border-radius:3px; color:var(--accent); }
+    @media (max-width:640px){ .stat-band { grid-template-columns:1fr 1fr; } }
+  </style>
 </head>
 <body data-base="..">
 
@@ -24,34 +49,79 @@
 <header class="hero">
   <p class="proj-label">Project 07 · E-commerce · SQL · BI</p>
   <h1>Olist Retail BI with SQL</h1>
-  <span class="status-badge"><span class="s-dot wip"></span>In progress</span>
-  <p class="hero-sub">Eight business-critical queries over Olist's 8-table e-commerce schema — the kind of BI work that answers real commercial questions directly from the database.</p>
+  <span class="status-badge"><span class="s-dot"></span>Complete</span>
+  <p class="hero-sub">Eight business questions answered directly from an 8-table e-commerce database — ~99k orders across the Olist Brazilian marketplace. Every insight is a SQL query using CTEs and window functions.</p>
+  <div class="links-row">
+    <a class="btn-link primary" href="https://github.com/Iniisaac24/olist-sql/blob/main/olist_sql.ipynb" target="_blank" rel="noopener">View the notebook ↗</a>
+    <a class="btn-link" href="https://github.com/Iniisaac24/olist-sql/blob/main/queries.sql" target="_blank" rel="noopener">queries.sql ↗</a>
+    <a class="btn-link" href="https://github.com/Iniisaac24/olist-sql" target="_blank" rel="noopener">GitHub repo ↗</a>
+  </div>
 </header>
 
 <div class="body">
   <div class="section">
-    <p class="section-label">Planned Approach</p>
-    <h2>What this project will cover</h2>
-    <div class="steps">
-      <div class="step"><span class="step-n">01</span><div><p class="step-title">Model the schema</p><p class="step-desc">Load and relate Olist's 8 tables (orders, items, payments, reviews, customers, sellers, products, geolocation) in PostgreSQL.</p></div></div>
-      <div class="step"><span class="step-n">02</span><div><p class="step-title">Revenue &amp; delivery KPIs</p><p class="step-desc">Monthly revenue trends and delivery performance broken down by seller state.</p></div></div>
-      <div class="step"><span class="step-n">03</span><div><p class="step-title">Cohort retention</p><p class="step-desc">Window functions to track repeat-purchase behaviour and pinpoint the drop-off window.</p></div></div>
-      <div class="step"><span class="step-n">04</span><div><p class="step-title">Seller scorecard</p><p class="step-desc">A ranked seller scorecard combining CTEs and ranking functions.</p></div></div>
+    <p class="section-label">Headline</p>
+    <div class="stat-band">
+      <div class="sb"><div class="sb-n">8 tables</div><div class="sb-l">~99k orders</div></div>
+      <div class="sb"><div class="sb-n">3.12%</div><div class="sb-l">repeat-customer rate</div></div>
+      <div class="sb"><div class="sb-n">2.57 vs 4.29</div><div class="sb-l">late vs on-time review</div></div>
+      <div class="sb"><div class="sb-n">38.3%</div><div class="sb-l">revenue from São Paulo</div></div>
     </div>
   </div>
 
   <div class="section">
-    <p class="section-label">Tools &amp; Libraries</p>
-    <h2>Planned stack</h2>
-    <div class="tools-wrap">
-      <span class="t-chip">PostgreSQL</span><span class="t-chip">CTEs</span>
-      <span class="t-chip">Window Functions</span><span class="t-chip">Python</span>
+    <p class="section-label">Findings</p>
+    <h2>What the database says about the business</h2>
+    <div class="findings">
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>It's a one-and-done marketplace.</strong> Only 3.12% of 96,096 customers ever place a second order — retention, not acquisition, is the untapped lever.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Late delivery is a review killer.</strong> On-time orders average 4.29★; late orders collapse to 2.57★, with 54% scoring 1–2 stars (vs 9% on-time). Logistics <em>is</em> the customer-experience strategy.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Revenue is highly concentrated.</strong> São Paulo alone drives 38.3% of national revenue; the top three states (SP, RJ, MG) account for 63%.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Payments are card-led (74%)</strong> but boleto (bank slip) remains 19% — a distinctly Brazilian channel worth designing for.</p></div>
     </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">The 8 queries</p>
+    <h2>CTEs and window functions throughout</h2>
+    <table class="mt">
+      <tr><th>#</th><th>Question</th><th>Technique</th></tr>
+      <tr><td>Q1</td><td>Monthly revenue &amp; order trend</td><td>date bucketing, join</td></tr>
+      <tr><td>Q2</td><td>Delivery performance by state</td><td>CTE, <code>CASE</code>, <code>HAVING</code></td></tr>
+      <tr><td>Q3</td><td>Payment behaviour</td><td><code>SUM() OVER ()</code></td></tr>
+      <tr><td>Q4</td><td>Repeat-customer rate</td><td>CTE, conditional aggregation</td></tr>
+      <tr><td>Q5</td><td>Top categories by revenue</td><td>multi-join, <code>COALESCE</code></td></tr>
+      <tr><td>Q6</td><td>Seller scorecard</td><td><code>RANK() OVER</code></td></tr>
+      <tr><td>Q7</td><td>Late delivery vs review score</td><td>CTE, <code>CASE</code> bucketing</td></tr>
+      <tr><td>Q8</td><td>Revenue by state, % of total</td><td><code>SUM(SUM()) OVER ()</code></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Evidence</p>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/olist-sql/main/figures/review_by_delivery.png" alt="Review score by delivery timeliness" />
+      <figcaption>On-time vs late delivery — a 1.7-star swing in average review.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/olist-sql/main/figures/monthly_revenue.png" alt="Monthly revenue trend" />
+      <figcaption>Monthly revenue trend (delivered orders).</figcaption>
+    </figure>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Tools &amp; Data</p>
+    <h2>Stack</h2>
+    <div class="tools-wrap">
+      <span class="t-chip">SQL (SQLite)</span><span class="t-chip">CTEs</span>
+      <span class="t-chip">Window functions</span><span class="t-chip">Python</span>
+      <span class="t-chip">pandas</span>
+    </div>
+    <p style="font-size:13px;color:var(--mid);margin-top:16px;line-height:1.7;">Data: <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank" rel="noopener" style="color:var(--accent);">Olist Brazilian E-Commerce</a> — ~99k orders, 8 relational tables.</p>
   </div>
 
   <div class="proj-nav">
     <a href="../projects.html" class="pn-link">← All Projects</a>
-    <a href="churn.html" class="pn-link primary">See a completed project: Churn →</a>
+    <a href="churn.html" class="pn-link primary">Back to the start: Churn →</a>
   </div>
 </div>
 
