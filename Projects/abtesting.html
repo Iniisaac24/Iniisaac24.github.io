@@ -4,12 +4,37 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Checkout A/B Test & Attribution — in progress" />
+  <meta name="description" content="Checkout A/B Test & Attribution — two-proportion z-test on 294k users + channel attribution" />
   <title>Checkout A/B Test &amp; Attribution — Ini Isaac Aniefiok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/theme.css" />
   <link rel="stylesheet" href="../assets/project.css" />
+  <style>
+    .links-row { display:flex; gap:16px; flex-wrap:wrap; margin-top:22px; }
+    .btn-link { font-size:13px; font-weight:500; color:var(--ink); text-decoration:none; border:1px solid var(--line); border-radius:5px; padding:8px 16px; transition:border-color .15s,color .15s; }
+    .btn-link:hover { border-color:var(--mid); }
+    .btn-link.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .btn-link.primary:hover { opacity:.88; }
+    .findings { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+    .finding { display:grid; grid-template-columns:20px 1fr; gap:12px; align-items:baseline; }
+    .f-bullet { width:5px; height:5px; border-radius:50%; background:var(--accent); margin-top:7px; }
+    .f-text { font-size:13.5px; font-weight:300; color:var(--mid); line-height:1.7; }
+    .f-text strong { font-weight:500; color:var(--ink); }
+    .stat-band { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:8px; }
+    .sb { background:var(--bg2); padding:20px 16px; text-align:center; }
+    .sb-n { font-family:'Instrument Sans',sans-serif; font-size:22px; color:var(--ink); }
+    .sb-l { font-size:11px; color:var(--dim); margin-top:4px; }
+    figure { margin-top:20px; }
+    figure img { width:100%; max-width:520px; border:1px solid var(--line); border-radius:8px; }
+    figure figcaption { font-size:12px; color:var(--dim); margin-top:8px; }
+    table.mt { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
+    table.mt th, table.mt td { text-align:left; padding:8px 12px; border-bottom:1px solid var(--line); color:var(--mid); }
+    table.mt th { color:var(--dim); font-weight:500; font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
+    table.mt td strong { color:var(--ink); }
+    .callout { background:var(--bg2); border-left:2px solid var(--accent); padding:16px 18px; border-radius:0 6px 6px 0; margin-top:8px; font-size:13.5px; color:var(--ink); line-height:1.7; }
+    @media (max-width:640px){ .stat-band { grid-template-columns:1fr 1fr; } }
+  </style>
 </head>
 <body data-base="..">
 
@@ -24,34 +49,79 @@
 <header class="hero">
   <p class="proj-label">Project 08 · Marketing · A/B Testing</p>
   <h1>Checkout A/B Test<br>&amp; Attribution</h1>
-  <span class="status-badge"><span class="s-dot wip"></span>In progress</span>
-  <p class="hero-sub">Measuring a checkout experiment's true effect and attributing conversions across channels — combining rigorous hypothesis testing with a multi-touch attribution model.</p>
+  <span class="status-badge"><span class="s-dot"></span>Complete</span>
+  <p class="hero-sub">Did a redesigned checkout page lift conversion? A rigorous test on 294,478 users — plus linear revenue attribution across marketing channels. The honest answer to the first question is "no", and knowing when to say no is the point.</p>
+  <div class="links-row">
+    <a class="btn-link primary" href="https://github.com/Iniisaac24/ab-testing/blob/main/ab_testing.ipynb" target="_blank" rel="noopener">View the notebook ↗</a>
+    <a class="btn-link" href="https://github.com/Iniisaac24/ab-testing" target="_blank" rel="noopener">GitHub repo ↗</a>
+  </div>
 </header>
 
 <div class="body">
   <div class="section">
-    <p class="section-label">Planned Approach</p>
-    <h2>What this project will cover</h2>
-    <div class="steps">
-      <div class="step"><span class="step-n">01</span><div><p class="step-title">Validate the experiment</p><p class="step-desc">A Sample Ratio Mismatch check to confirm the randomisation is trustworthy before reading results.</p></div></div>
-      <div class="step"><span class="step-n">02</span><div><p class="step-title">Hypothesis test</p><p class="step-desc">A two-proportion z-test on conversion, with device-level segmentation and confidence intervals.</p></div></div>
-      <div class="step"><span class="step-n">03</span><div><p class="step-title">Practical significance</p><p class="step-desc">Frame the result in terms of business impact, not just statistical significance.</p></div></div>
-      <div class="step"><span class="step-n">04</span><div><p class="step-title">Attribution</p><p class="step-desc">A multi-touch linear attribution model ranking channels by revenue per customer.</p></div></div>
+    <p class="section-label">Headline</p>
+    <div class="stat-band">
+      <div class="sb"><div class="sb-n">294,478</div><div class="sb-l">users tested</div></div>
+      <div class="sb"><div class="sb-n">p = 0.19</div><div class="sb-l">no significant lift</div></div>
+      <div class="sb"><div class="sb-n">✓ pass</div><div class="sb-l">SRM validity check</div></div>
+      <div class="sb"><div class="sb-n">44%</div><div class="sb-l">revenue via Store</div></div>
     </div>
   </div>
 
   <div class="section">
-    <p class="section-label">Tools &amp; Libraries</p>
-    <h2>Planned stack</h2>
+    <p class="section-label">Part 1 · The A/B test</p>
+    <h2>A clean negative result</h2>
+    <table class="mt">
+      <tr><th>Group</th><th>Conversion</th><th>Test</th></tr>
+      <tr><td>Control (old page)</td><td>12.04%</td><td rowspan="2" style="vertical-align:middle;">z = −1.31 · p = 0.19<br>95% CI on lift: [−0.39, +0.08] pp</td></tr>
+      <tr><td>Treatment (new page)</td><td>11.88%</td></tr>
+    </table>
+    <div class="callout"><strong>Verdict — do not ship.</strong> With a passing Sample Ratio Mismatch check (145,274 vs 145,310, p=0.95) the randomisation is trustworthy, so the result can be believed: the new page shows <strong>no significant conversion lift</strong>, and the point estimate is even slightly negative. Manufacturing a "win" here would be malpractice — the value is in calling it correctly.</div>
+    <figure>
+      <img src="https://raw.githubusercontent.com/Iniisaac24/ab-testing/main/figures/conversion_by_group.png" alt="Conversion by group with 95% CI" />
+      <figcaption>Conversion by group with 95% confidence intervals — the bars overlap.</figcaption>
+    </figure>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Part 2 · Channel attribution</p>
+    <h2>Store leads, but Catalog punches above its weight</h2>
+    <table class="mt">
+      <tr><th>Channel</th><th>Purchase share</th><th>Revenue share</th></tr>
+      <tr><td><strong>Store</strong></td><td>46.2%</td><td><strong>43.9%</strong></td></tr>
+      <tr><td>Web</td><td>32.6%</td><td>30.4%</td></tr>
+      <tr><td>Catalog</td><td>21.2%</td><td>25.7%</td></tr>
+    </table>
+    <div class="findings" style="margin-top:18px;">
+      <div class="finding"><span class="f-bullet"></span><p class="f-text"><strong>Catalog over-indexes on value</strong> — 21% of purchases but 26% of revenue, i.e. larger average baskets. A budget shift toward catalog for high-value segments is worth testing next.</p></div>
+      <div class="finding"><span class="f-bullet"></span><p class="f-text">Linear multi-touch attribution distributes each customer's spend across channels by their purchase mix; overall campaign response rate was 15%.</p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Approach</p>
+    <h2>Rigour before results</h2>
+    <div class="steps">
+      <div class="step"><span class="step-n">01</span><div><p class="step-title">Validate the experiment</p><p class="step-desc">Dropped mismatched page assignments and duplicate users, then ran a Sample Ratio Mismatch check — <em>before</em> reading any result — to confirm the split wasn't corrupted.</p></div></div>
+      <div class="step"><span class="step-n">02</span><div><p class="step-title">Test properly</p><p class="step-desc">Two-proportion z-test with a 95% confidence interval on the lift, not just a bare p-value.</p></div></div>
+      <div class="step"><span class="step-n">03</span><div><p class="step-title">Attribute revenue</p><p class="step-desc">Linear attribution across web, catalog, and store from purchase-level data.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Tools &amp; Data</p>
+    <h2>Stack</h2>
     <div class="tools-wrap">
       <span class="t-chip">Python</span><span class="t-chip">statsmodels</span>
-      <span class="t-chip">SciPy</span><span class="t-chip">Plotly</span>
+      <span class="t-chip">SciPy</span><span class="t-chip">pandas</span>
+      <span class="t-chip">matplotlib</span>
     </div>
+    <p style="font-size:13px;color:var(--mid);margin-top:16px;line-height:1.7;">Data: <a href="https://www.kaggle.com/datasets/zhangluyuan/ab-testing" target="_blank" rel="noopener" style="color:var(--accent);">A/B Testing</a> (294,478 users) · <a href="https://www.kaggle.com/datasets/rodsaldanha/arketing-campaign" target="_blank" rel="noopener" style="color:var(--accent);">Marketing Campaign</a> (2,240 customers).</p>
   </div>
 
   <div class="proj-nav">
     <a href="../projects.html" class="pn-link">← All Projects</a>
-    <a href="churn.html" class="pn-link primary">See a completed project: Churn →</a>
+    <a href="churn.html" class="pn-link primary">Related: Churn prediction →</a>
   </div>
 </div>
 

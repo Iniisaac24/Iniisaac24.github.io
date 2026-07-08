@@ -89,7 +89,7 @@
 <!-- HEADER -->
 <header class="page-header">
   <p class="section-label">Portfolio</p>
-  <h1 class="page-title">Eight projects.<br>Six live, two in build.</h1>
+  <h1 class="page-title">Eight projects.<br>Seven live, one in build.</h1>
   <p class="page-sub">Each project tackles a different industry and analytical challenge. Completed work links straight to its code; in-progress work shows the planned approach.</p>
 </header>
 
@@ -276,16 +276,20 @@
     <div class="proj-content">
       <div class="proj-meta">
         <span class="proj-domain">Marketing · A/B Testing</span>
-        <span class="proj-status"><span class="s-dot wip"></span>In progress</span>
+        <span class="proj-status"><span class="s-dot"></span>Complete</span>
       </div>
       <h2 class="proj-title">Checkout A/B Test &amp; Attribution</h2>
-      <p class="proj-desc">Plan: a two-proportion z-test across ~45,000 sessions with a Sample Ratio Mismatch check and device-level segmentation, plus a multi-touch linear attribution model ranking channels by revenue per customer.</p>
+      <p class="proj-desc">Two-proportion z-test on 294,478 users (with a Sample Ratio Mismatch validity check) plus linear revenue attribution across marketing channels.</p>
+      <div class="proj-outcome"><strong>Outcome —</strong> A clean negative: the new page shows no significant conversion lift (12.04% vs 11.88%, p=0.19) — the correct call is not to ship. Store drives 44% of revenue; Catalog over-indexes on value.</div>
       <div class="proj-footer">
         <div class="proj-tools">
           <span class="t-chip">Python</span><span class="t-chip">statsmodels</span>
-          <span class="t-chip">SciPy</span><span class="t-chip">Plotly</span>
+          <span class="t-chip">SciPy</span><span class="t-chip">pandas</span>
         </div>
-        <div class="proj-links"><span class="p-soon">Write-up coming soon</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Iniisaac24/ab-testing" class="p-link primary" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://github.com/Iniisaac24/ab-testing/blob/main/ab_testing.ipynb" class="p-link" target="_blank" rel="noopener">Notebook ↗</a>
+        </div>
       </div>
     </div>
   </article>
