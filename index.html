@@ -44,11 +44,11 @@
     h1 .hl-o { color: var(--accent); }
     .hl-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: #16a34a; color: #fff; font-weight: 600; font-size: 14.5px;
+      background: var(--accent); color: #fff; font-weight: 600; font-size: 14.5px;
       padding: 13px 26px; text-decoration: none; border: none; border-radius: 0;
       transition: background .15s;
     }
-    .hl-primary:hover { background: #15803d; }
+    .hl-primary:hover { background: #a8420a; }
     .hl-secondary {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none;
@@ -95,6 +95,7 @@
     .work-muted { color: var(--dim); font-weight: 400; }
     .work-link { font-size: 13px; font-weight: 500; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; }
     .work-card:hover .work-link { color: var(--accent); gap: 10px; }
+    .work-card.spotlight { border: 1px solid var(--line); margin-top: 20px; }
 
     .about-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; }
     .about-col h3 { font-size: 13.5px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
@@ -103,7 +104,7 @@
     .about-text p { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.85; margin-bottom: 16px; }
     .about-text p:first-child { color: var(--ink); font-weight: 500; font-size: 16px; }
     .about-text p:last-child { margin-bottom: 0; }
-    .about-photo img { width: 100%; border-radius: 10px; border: 1px solid var(--line); display: block; }
+    .about-photo img { width: 100%; max-height: 440px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); display: block; }
 
     .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-top: 56px; }
     .stat { background: var(--bg2); padding: 28px 24px; text-align: center; }
@@ -179,8 +180,6 @@
 
 <!-- PROJECTS -->
 <div class="section" id="projects">
-  <p class="section-label section-label--strong">Selected Work</p>
-
   <div class="work-grid">
 
     <a class="work-card" href="Projects/churn.html">
@@ -247,6 +246,13 @@
       <img src="assets/portrait.jpg" alt="Ini Isaac Aniefiok" />
     </div>
   </div>
+
+  <p class="section-label" style="margin-top: 56px;">Spotlight project</p>
+  <a class="work-card spotlight" href="Projects/churn.html">
+    <p class="work-cat">Telecom · Predictive Analytics</p>
+    <h3 class="work-title">Customer Churn Prediction. <span class="work-muted">XGBoost flags at-risk customers at 0.84 AUC and 76% recall, with SHAP explaining every driver.</span></h3>
+    <span class="work-link">View project →</span>
+  </a>
 
   <div class="stats-row">
     <div class="stat"><p class="stat-n">8</p><p class="stat-l">Live projects</p></div>
