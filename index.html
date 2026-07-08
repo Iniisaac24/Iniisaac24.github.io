@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="assets/theme.css" />
   <style>
     /* ── page-specific: home ─────────────────────── */
-    #hero { max-width: 820px; margin: 0 auto; padding: 140px 40px 96px;
+    #hero { max-width: 80vw; margin: 0 auto; padding: 140px 40px 96px;
       background-image: radial-gradient(var(--line) 1.1px, transparent 1.1px); background-size: 24px 24px; }
 
     .avail {
@@ -45,11 +45,10 @@
     .hl-primary {
       display: inline-flex; align-items: center; gap: 8px;
       background: #16a34a; color: #fff; font-weight: 600; font-size: 14.5px;
-      padding: 13px 24px; border-radius: 7px; text-decoration: none; border: none;
-      box-shadow: 4px 4px 0 var(--ink); transition: transform .12s ease, box-shadow .12s ease;
+      padding: 13px 26px; text-decoration: none; border: none; border-radius: 0;
+      transition: background .15s;
     }
-    .hl-primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); opacity: 1; }
-    .hl-primary:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+    .hl-primary:hover { background: #15803d; }
     .hl-secondary {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none;
@@ -62,7 +61,7 @@
     .tools-list { display: flex; gap: 24px; flex-wrap: wrap; }
     .tools-list span { font-size: 12.5px; font-weight: 400; color: var(--dim); white-space: nowrap; }
 
-    .section { max-width: 780px; margin: 0 auto; padding: 80px 40px; border-top: 1px solid var(--line); }
+    .section { max-width: 80vw; margin: 0 auto; padding: 80px 40px; border-top: 1px solid var(--line); }
     .section-label { font-size: 11px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--dim); margin-bottom: 48px; }
     .section-label--strong { font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: .04em; }
 
@@ -86,6 +85,17 @@
     .proj-row-tools { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
     .t-chip { font-size: 11px; font-weight: 400; color: var(--dim); background: var(--bg2); padding: 3px 10px; border-radius: 3px; white-space: nowrap; }
 
+    /* Attio-style work grid */
+    .work-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+    .work-card { display: flex; flex-direction: column; gap: 14px; min-height: 240px; padding: 36px 40px; text-decoration: none; color: inherit; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background .15s; }
+    .work-card:nth-child(2n) { border-right: none; }
+    .work-card:hover { background: var(--bg2); }
+    .work-cat { font-size: 11px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--dim); }
+    .work-title { font-family:'Instrument Sans',sans-serif; font-size: 23px; font-weight: 600; line-height: 1.32; letter-spacing: -.01em; color: var(--ink); margin-top: auto; }
+    .work-muted { color: var(--dim); font-weight: 400; }
+    .work-link { font-size: 13px; font-weight: 500; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; }
+    .work-card:hover .work-link { color: var(--accent); gap: 10px; }
+
     .about-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; }
     .about-col h3 { font-size: 13.5px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
     .about-col p { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.75; }
@@ -100,14 +110,16 @@
     .stat-n { font-family:'Instrument Sans',sans-serif; font-weight:400; font-size: 38px; color: var(--ink); line-height: 1; margin-bottom: 6px; }
     .stat-l { font-size: 12px; font-weight: 400; color: var(--dim); }
 
-    #contact { border-top: 1px solid var(--line); padding: 100px 40px; max-width: 780px; margin: 0 auto; }
+    #contact { border-top: 1px solid var(--line); padding: 100px 40px; max-width: 80vw; margin: 0 auto; }
     #contact .section-label { margin-bottom: 28px; }
-    .contact-heading { font-family:'Instrument Sans',sans-serif; font-weight:400; font-size: clamp(30px, 4vw, 48px); letter-spacing: -.02em; line-height: 1.1; color: var(--ink); margin-bottom: 20px; max-width: 440px; }
+    .contact-heading { font-family:'Instrument Sans',sans-serif; font-weight:600; font-size: clamp(42px, 6vw, 78px); letter-spacing: -.02em; line-height: 1.05; color: var(--ink); margin-bottom: 20px; max-width: 760px; }
     .contact-sub { font-size: 14.5px; font-weight: 300; color: var(--mid); line-height: 1.75; max-width: 380px; margin-bottom: 40px; }
     .contact-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
 
     @media (max-width: 680px) {
-      #hero, .section, #contact { padding-left: 20px; padding-right: 20px; }
+      #hero, .section, #contact { max-width: 100%; padding-left: 20px; padding-right: 20px; }
+      .work-grid { grid-template-columns: 1fr; }
+      .work-card { border-right: none; padding: 28px 20px; min-height: 0; }
       .tools-row { padding: 18px 20px; }
       .proj-row { grid-template-columns: 28px 1fr; }
       .proj-row-tools { display: none; }
@@ -169,118 +181,54 @@
 <div class="section" id="projects">
   <p class="section-label section-label--strong">Selected Work</p>
 
-  <div class="proj-list">
+  <div class="work-grid">
 
-    <a class="proj-row" href="Projects/churn.html">
-      <span class="proj-n">01</span>
-      <div class="proj-row-body">
-        <p class="proj-row-domain">Telecom · Predictive Analytics</p>
-        <p class="proj-row-title">Customer Churn Prediction</p>
-        <p class="proj-row-desc">XGBoost (AUC 0.84, 76% recall) identifying at-risk customers across 7,043 records — top drivers: contract type, tenure, and service tier.</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">Python</span>
-        <span class="t-chip">XGBoost</span>
-        <span class="t-chip">SHAP</span>
-      </div>
+    <a class="work-card" href="Projects/churn.html">
+      <p class="work-cat">Telecom · Predictive Analytics</p>
+      <h3 class="work-title">Customer Churn Prediction. <span class="work-muted">XGBoost flags at-risk customers at 0.84 AUC and 76% recall.</span></h3>
+      <span class="work-link">View project →</span>
     </a>
 
-    <a class="proj-row" href="Projects/healthcare.html">
-      <span class="proj-n">02</span>
-      <div class="proj-row-body">
-        <p class="proj-row-domain">Healthcare · Statistical Analysis</p>
-        <p class="proj-row-title">Hospital Readmission Analysis</p>
-        <p class="proj-row-desc">Chi-square &amp; Mann-Whitney tests on 101,766 diabetic encounters (Diabetes 130-US) — prior inpatient visits are the top readmission signal; A1C result is not associated (p=0.83).</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">Python</span>
-        <span class="t-chip">SciPy</span>
-        <span class="t-chip">pandas</span>
-      </div>
+    <a class="work-card" href="Projects/healthcare.html">
+      <p class="work-cat">Healthcare · Statistical Analysis</p>
+      <h3 class="work-title">Hospital Readmission Analysis. <span class="work-muted">What actually drives 30-day readmission across 101k encounters.</span></h3>
+      <span class="work-link">View project →</span>
     </a>
 
-    <a class="proj-row" href="Projects/finance.html">
-      <span class="proj-n">03</span>
-      <div class="proj-row-body">
-        <p class="proj-row-domain">Finance · Dashboard</p>
-        <p class="proj-row-title">Investment Portfolio Risk Dashboard</p>
-        <p class="proj-row-desc">Risk metrics for a 13-stock portfolio vs. the S&P 500 from live yfinance data — 23.6% return, Sharpe 1.61, and a diversified book (no pair above 0.85 correlation).</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">Streamlit</span>
-        <span class="t-chip">yfinance</span>
-        <span class="t-chip">NumPy</span>
-      </div>
+    <a class="work-card" href="Projects/finance.html">
+      <p class="work-cat">Finance · Risk Analytics</p>
+      <h3 class="work-title">Investment Portfolio Risk Dashboard. <span class="work-muted">Sharpe 1.61 and a diversified book, from live market data.</span></h3>
+      <span class="work-link">View project →</span>
     </a>
 
-    <a class="proj-row" href="Projects/retail.html">
-      <span class="proj-n">04</span>
-      <div class="proj-row-body">
-        <p class="proj-row-domain">Retail · Time Series</p>
-        <p class="proj-row-title">Walmart Sales Forecasting</p>
-        <p class="proj-row-desc">12-week demand forecast across 45 stores — LightGBM beats seasonal-naive and Holt-Winters at 1.37% company MAPE (7.79% weighted MAPE at store-department level).</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">LightGBM</span>
-        <span class="t-chip">statsmodels</span>
-        <span class="t-chip">pandas</span>
-      </div>
+    <a class="work-card" href="Projects/retail.html">
+      <p class="work-cat">Retail · Time Series</p>
+      <h3 class="work-title">Walmart Sales Forecasting. <span class="work-muted">LightGBM beats the baselines at 1.37% MAPE across 45 stores.</span></h3>
+      <span class="work-link">View project →</span>
     </a>
 
-    <a class="proj-row" href="Projects/hr.html">
-      <span class="proj-n">05</span>
-      <div class="proj-row-body">
-        <p class="proj-row-domain">HR · People Analytics</p>
-        <p class="proj-row-title">Employee Attrition Analysis</p>
-        <p class="proj-row-desc">Flight-risk model + K-Means segmentation on 1,470 employees (IBM HR) — overtime &amp; short tenure drive 55% attrition; the model catches 56% of leavers in the top-20% risk flag.</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">Python</span>
-        <span class="t-chip">scikit-learn</span>
-        <span class="t-chip">K-Means</span>
-      </div>
+    <a class="work-card" href="Projects/hr.html">
+      <p class="work-cat">HR · People Analytics</p>
+      <h3 class="work-title">Employee Attrition Analysis. <span class="work-muted">Overtime and short tenure drive 55% attrition — flagged early.</span></h3>
+      <span class="work-link">View project →</span>
     </a>
 
-    <a class="proj-row" href="Projects/realestate.html">
-      <span class="proj-n">06</span>
-      <div class="proj-row-body">
-        <p class="proj-row-domain">Real Estate · Geospatial</p>
-        <p class="proj-row-title">Property Price Prediction &amp; Mapping</p>
-        <p class="proj-row-desc">XGBoost (R² 0.91) on 21,613 King County sales with a folium map of mispriced ZIPs — location dominates price, and 98014 sells ~12% below model value.</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">XGBoost</span>
-        <span class="t-chip">folium</span>
-        <span class="t-chip">scikit-learn</span>
-      </div>
+    <a class="work-card" href="Projects/realestate.html">
+      <p class="work-cat">Real Estate · Geospatial</p>
+      <h3 class="work-title">Property Price Prediction &amp; Mapping. <span class="work-muted">XGBoost at R² 0.91 maps where the market is mispriced.</span></h3>
+      <span class="work-link">View project →</span>
     </a>
 
-    <a class="proj-row" href="Projects/sql.html">
-      <span class="proj-n">07</span>
-      <div class="proj-row-body">
-        <p class="proj-row-domain">E-commerce · SQL · BI</p>
-        <p class="proj-row-title">Olist Retail BI with SQL</p>
-        <p class="proj-row-desc">Eight business queries (CTEs + window functions) across Olist's 8-table schema — 3.1% reorder rate, late delivery tanks reviews (2.6★ vs 4.3★), and SP drives 38% of revenue.</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">SQL</span>
-        <span class="t-chip">CTEs</span>
-        <span class="t-chip">Python</span>
-      </div>
+    <a class="work-card" href="Projects/sql.html">
+      <p class="work-cat">E-commerce · SQL · BI</p>
+      <h3 class="work-title">Olist Retail BI with SQL. <span class="work-muted">Eight business queries across an 8-table relational schema.</span></h3>
+      <span class="work-link">View project →</span>
     </a>
 
-    <a class="proj-row" href="Projects/abtesting.html">
-      <span class="proj-n">08</span>
-      <div class="proj-row-body">
-        <p class="proj-row-domain">Marketing · A/B Testing</p>
-        <p class="proj-row-title">Checkout A/B Test &amp; Attribution</p>
-        <p class="proj-row-desc">Two-proportion z-test on 294k users — an honest negative (no significant lift, p=0.19) — plus linear channel revenue attribution.</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">Python</span>
-        <span class="t-chip">statsmodels</span>
-        <span class="t-chip">SciPy</span>
-      </div>
+    <a class="work-card" href="Projects/abtesting.html">
+      <p class="work-cat">Marketing · A/B Testing</p>
+      <h3 class="work-title">Checkout A/B Test &amp; Attribution. <span class="work-muted">A rigorous test on 294k users — an honest negative result.</span></h3>
+      <span class="work-link">View project →</span>
     </a>
 
   </div>
