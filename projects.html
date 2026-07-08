@@ -22,7 +22,8 @@
     .f-btn.on { color: var(--ink); border-bottom-color: var(--ink); }
 
     .proj-list { max-width: 75vw; margin: 0 auto; padding: 0 40px 80px; }
-    .proj-item { display: grid; grid-template-columns: 36px 1fr; gap: 28px; padding: 40px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+    .proj-item { display: grid; grid-template-columns: 36px 1fr; gap: 28px; padding: 40px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; position: relative; }
+    .proj-cover { position: absolute; inset: 0; z-index: 1; }
     .proj-item:first-child { border-top: 1px solid var(--line); margin-top: 8px; }
     .proj-item.hidden { display: none; }
     .proj-n { font-size: 11px; font-weight: 400; color: var(--dim); padding-top: 4px; }
@@ -42,7 +43,7 @@
     .proj-footer { display: flex; align-items: center; justify-content: space-between; }
     .proj-tools { display: flex; gap: 8px; flex-wrap: wrap; }
     .t-chip { font-size: 11px; font-weight: 400; color: var(--dim); background: var(--bg2); padding: 3px 10px; border-radius: 3px; }
-    .proj-links { display: flex; gap: 16px; }
+    .proj-links { display: flex; gap: 16px; position: relative; z-index: 2; }
     .p-link { font-size: 12.5px; font-weight: 400; color: var(--mid); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 1px; transition: color .15s, border-color .15s; white-space: nowrap; }
     .p-link:hover { color: var(--ink); border-color: var(--mid); }
     .p-link.primary { color: var(--ink); border-bottom-color: var(--ink); }
@@ -108,6 +109,7 @@
 
   <!-- 01 -->
   <article class="proj-item" id="churn" data-tags="python ml">
+    <a class="proj-cover" href="Projects/churn.html" aria-label="Open Customer Churn Prediction"></a>
     <span class="proj-n">01</span>
     <div class="proj-content">
       <div class="proj-meta">
@@ -132,6 +134,7 @@
 
   <!-- 02 -->
   <article class="proj-item" id="healthcare" data-tags="python">
+    <a class="proj-cover" href="Projects/healthcare.html" aria-label="Open Hospital Readmission Analysis"></a>
     <span class="proj-n">02</span>
     <div class="proj-content">
       <div class="proj-meta">
@@ -156,6 +159,7 @@
 
   <!-- 03 -->
   <article class="proj-item" id="finance" data-tags="python dashboard">
+    <a class="proj-cover" href="Projects/finance.html" aria-label="Open Investment Portfolio Risk Dashboard"></a>
     <span class="proj-n">03</span>
     <div class="proj-content">
       <div class="proj-meta">
@@ -180,6 +184,7 @@
 
   <!-- 04 -->
   <article class="proj-item" id="retail" data-tags="python timeseries">
+    <a class="proj-cover" href="Projects/retail.html" aria-label="Open Walmart Sales Forecasting"></a>
     <span class="proj-n">04</span>
     <div class="proj-content">
       <div class="proj-meta">
@@ -204,6 +209,7 @@
 
   <!-- 05 -->
   <article class="proj-item" id="hr" data-tags="python ml dashboard">
+    <a class="proj-cover" href="Projects/hr.html" aria-label="Open Employee Attrition Analysis"></a>
     <span class="proj-n">05</span>
     <div class="proj-content">
       <div class="proj-meta">
@@ -228,6 +234,7 @@
 
   <!-- 06 -->
   <article class="proj-item" id="realestate" data-tags="python ml">
+    <a class="proj-cover" href="Projects/realestate.html" aria-label="Open Property Price Prediction and Mapping"></a>
     <span class="proj-n">06</span>
     <div class="proj-content">
       <div class="proj-meta">
@@ -252,6 +259,7 @@
 
   <!-- 07 -->
   <article class="proj-item" id="sql" data-tags="sql">
+    <a class="proj-cover" href="Projects/sql.html" aria-label="Open Olist Retail BI with SQL"></a>
     <span class="proj-n">07</span>
     <div class="proj-content">
       <div class="proj-meta">
@@ -276,6 +284,7 @@
 
   <!-- 08 -->
   <article class="proj-item" id="abtesting" data-tags="python">
+    <a class="proj-cover" href="Projects/abtesting.html" aria-label="Open Checkout A/B Test and Attribution"></a>
     <span class="proj-n">08</span>
     <div class="proj-content">
       <div class="proj-meta">
