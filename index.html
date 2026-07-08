@@ -18,7 +18,8 @@
   <link rel="stylesheet" href="assets/theme.css" />
   <style>
     /* ── page-specific: home ─────────────────────── */
-    #hero { max-width: 780px; margin: 0 auto; padding: 148px 40px 96px; }
+    #hero { max-width: 820px; margin: 0 auto; padding: 140px 40px 96px;
+      background-image: radial-gradient(var(--line) 1.1px, transparent 1.1px); background-size: 24px 24px; }
 
     .avail {
       display: inline-flex; align-items: center; gap: 8px;
@@ -38,16 +39,23 @@
     .hero-body { font-size: 16px; font-weight: 300; color: var(--mid); line-height: 1.75; max-width: 420px; margin-bottom: 44px; }
 
     .hero-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+    h1 .hl-g { color: #16a34a; }
+    h1 .hl-b { color: #2563eb; }
+    h1 .hl-o { color: var(--accent); }
     .hl-primary {
-      font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none;
-      border-bottom: 1.5px solid var(--ink); padding-bottom: 1px; transition: opacity .15s;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #16a34a; color: #fff; font-weight: 600; font-size: 14.5px;
+      padding: 13px 24px; border-radius: 7px; text-decoration: none; border: none;
+      box-shadow: 4px 4px 0 var(--ink); transition: transform .12s ease, box-shadow .12s ease;
     }
-    .hl-primary:hover { opacity: .55; }
+    .hl-primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); opacity: 1; }
+    .hl-primary:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
     .hl-secondary {
-      font-size: 14px; font-weight: 400; color: var(--mid); text-decoration: none;
-      border-bottom: 1px solid var(--line); padding-bottom: 1px; transition: color .15s, border-color .15s;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none;
+      border-bottom: 1.5px solid var(--ink); padding-bottom: 2px; transition: opacity .15s;
     }
-    .hl-secondary:hover { color: var(--ink); border-color: var(--mid); }
+    .hl-secondary:hover { opacity: .55; }
 
     .tools-row { border-top: 1px solid var(--line); padding: 22px 40px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .tools-label { font-size: 11px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--dim); white-space: nowrap; margin-right: 32px; flex-shrink: 0; }
@@ -130,20 +138,19 @@
 <section id="hero">
   <div class="avail">
     <span class="avail-dot"></span>
-    Available for opportunities
+    Available for data analyst roles
   </div>
 
-  <h1>A data professional<br>focused on <span class="accent">decisions,<br>not dashboards.</span></h1>
+  <h1>I help businesses <span class="hl-g">uncover&nbsp;trends,</span> <span class="hl-b">build&nbsp;models,</span> and <span class="hl-o">drive&nbsp;growth</span> from data.</h1>
 
   <p class="hero-body">
-    I work across the full analytics stack — SQL, Python, and Tableau —
-    to turn raw data into clear findings that teams can actually act on.
+    A data analyst working across the full stack — SQL, Python, and machine learning —
+    turning raw data into decisions teams can actually act on.
   </p>
 
   <div class="hero-links">
-    <a href="projects.html" class="hl-primary">View Projects →</a>
-    <a href="assets/resume.pdf" class="hl-secondary" target="_blank">Download CV</a>
-    <a href="#contact" class="hl-secondary">Get in touch</a>
+    <a href="projects.html" class="hl-primary">View my work →</a>
+    <a href="#contact" class="hl-secondary">Get in touch ↗</a>
   </div>
 </section>
 
@@ -285,7 +292,6 @@
 
   <div class="about-bio">
     <div class="about-text">
-      <p>YH, that's me. You may be wondering who is this and how did you get here.</p>
       <p>Meet Ini, a Chess lover, with a strong background in User Experience design. I'm a Data Analyst with proven expertise in problem-solving, research and analytics, systems design, EDA directed towards business growth and Machine Learning techniques. I help businesses uncover trends and insights from data for business strategy and growth.</p>
       <p>I'm also a big lover of love and music, with a newly found interest in spoken words.</p>
     </div>
