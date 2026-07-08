@@ -13,12 +13,12 @@
   --line:   #e8e8e4;
   --bg:     #ffffff;
   --bg2:    #f7f7f5;
-  --accent: #c4500a;
+  --accent: #ff5a1f;
 }
 
 html[data-theme="dark"] {
   --ink: #f0ede4; --mid: #9a9790; --dim: #5c5a54;
-  --line: #2c2b26; --bg: #141412; --bg2: #1e1d1a; --accent: #f26419;
+  --line: #2c2b26; --bg: #141412; --bg2: #1e1d1a; --accent: #ff6a33;
 }
 
 html { scroll-behavior: smooth; }
@@ -71,11 +71,12 @@ nav.scrolled { border-bottom-color: var(--line); }
 }
 .nav-back:hover { color: var(--ink); border-color: var(--mid); }
 .nav-resume {
+  font-family: 'Instrument Sans', sans-serif;
   font-size: 13.5px; font-weight: 600; color: #fff; text-decoration: none;
   background: var(--accent); padding: 9px 18px; border: none; border-radius: 0;
   transition: background .15s;
 }
-.nav-resume:hover { background: #a8420a; color: #fff; }
+.nav-resume:hover { background: #e64a19; color: #fff; }
 
 .theme-toggle {
   background: none; border: none; cursor: pointer; color: var(--mid);
