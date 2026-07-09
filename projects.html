@@ -14,7 +14,7 @@
     .page-header { max-width: 75vw; margin: 0 auto; padding: 130px 40px 64px; border-bottom: 1px solid var(--line); }
     .section-label { font-size: 11px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
     .page-title { font-family:'Instrument Sans',sans-serif; font-weight:400; font-size: clamp(36px, 5vw, 58px); line-height: 1.08; letter-spacing: -.02em; color: var(--ink); margin-bottom: 18px; }
-    .page-sub { font-size: 14.5px; font-weight: 300; color: var(--mid); line-height: 1.75; max-width: 400px; }
+    .page-sub { font-size: 15px; font-weight: 400; color: var(--mid); line-height: 1.8; max-width: 680px; }
 
     .filter-row { max-width: 75vw; margin: 0 auto; padding: 20px 40px; display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--line); }
     .f-btn { font-size: 12px; font-weight: 400; color: var(--mid); background: none; border: none; padding: 4px 0; margin-right: 6px; cursor: pointer; border-bottom: 1.5px solid transparent; transition: color .15s, border-color .15s; font-family: 'Geist', sans-serif; }
@@ -49,6 +49,14 @@
     .p-link.primary { color: var(--ink); border-bottom-color: var(--ink); }
     .p-link.primary:hover { opacity: .55; }
     .p-soon { font-size: 12px; font-weight: 400; color: var(--dim); }
+    .p-soon.accent { color: var(--accent); }
+
+    .track-divider { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; padding: 44px 0 4px; }
+    .track-divider.hidden { display: none; }
+    .track-divider h2 { font-family:'Instrument Sans',sans-serif; font-weight: 600; font-size: 15px; letter-spacing: .02em; color: var(--ink); }
+    .track-divider span { font-size: 12px; font-weight: 300; color: var(--mid); }
+    .proj-item .proj-goal { font-size: 12.5px; font-weight: 400; color: var(--ink); padding: 12px 14px; background: var(--bg2); border-left: 2px solid var(--accent); border-radius: 0 4px 4px 0; margin-bottom: 18px; line-height: 1.6; }
+    .proj-item .proj-goal strong { font-weight: 500; }
 
     .empty { display: none; padding: 60px 40px; font-size: 13.5px; font-weight: 300; color: var(--dim); max-width: 75vw; margin: 0 auto; }
     .empty.show { display: block; }
@@ -84,8 +92,8 @@
 <!-- HEADER -->
 <header class="page-header">
   <p class="section-label">Portfolio</p>
-  <h1 class="page-title">Eight projects.<br>All eight live.</h1>
-  <p class="page-sub">Each project tackles a different industry and analytical challenge — every one links straight to its own repo, notebook, and real, reproducible results.</p>
+  <h1 class="page-title">Eight analytics projects,<br>built end to end.</h1>
+  <p class="page-sub">Spanning telecom, healthcare, finance, retail, HR, real estate, e-commerce, and marketing — the work covers exploratory analysis, statistical testing, predictive modelling, time-series forecasting, and SQL business intelligence. Each project runs on a public dataset and links to its own GitHub repo and executed notebook, so every metric on these pages can be reproduced from the code, not just taken on trust. A data engineering track is now in build — batch ETL, dbt, Airflow, streaming, and Spark on free, open tooling — extending the portfolio from analysis into production data pipelines.</p>
 </header>
 
 <!-- FILTERS -->
@@ -96,6 +104,7 @@
   <button class="f-btn" data-filter="ml">Machine Learning</button>
   <button class="f-btn" data-filter="dashboard">Dashboard</button>
   <button class="f-btn" data-filter="timeseries">Time Series</button>
+  <button class="f-btn" data-filter="dataeng">Data Engineering</button>
 </div>
 
 <!-- PROJECTS -->
@@ -301,6 +310,127 @@
     </div>
   </article>
 
+  <!-- ── DATA ENGINEERING TRACK ────────────────────── -->
+  <div class="track-divider" data-track="dataeng">
+    <h2>Data Engineering track</h2>
+    <span>In build — free, open tooling, batch to scale</span>
+  </div>
+
+  <!-- 09 -->
+  <article class="proj-item" id="de-etl" data-tags="dataeng python">
+    <span class="proj-n">09</span>
+    <div class="proj-content">
+      <div class="proj-meta">
+        <span class="proj-domain">Data Engineering · Batch ETL</span>
+        <span class="proj-status"><span class="s-dot wip"></span>Planned</span>
+      </div>
+      <h2 class="proj-title">Crypto Market ETL Pipeline</h2>
+      <p class="proj-desc">A bronze → silver → gold pipeline pulling the CoinGecko API on a daily GitHub Actions schedule, cleaning with pandas, and landing appended tables in DuckDB — the commit history is the proof it runs.</p>
+      <div class="proj-goal"><strong>Will demonstrate —</strong> scheduled ingestion, the medallion (bronze/silver/gold) architecture, and idempotent incremental loads.</div>
+      <div class="proj-footer">
+        <div class="proj-tools">
+          <span class="t-chip">Python</span><span class="t-chip">DuckDB</span>
+          <span class="t-chip">GitHub Actions</span><span class="t-chip">pandas</span>
+        </div>
+        <div class="proj-links">
+          <span class="p-soon accent">Repo coming soon</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 10 -->
+  <article class="proj-item" id="de-dbt" data-tags="dataeng sql">
+    <span class="proj-n">10</span>
+    <div class="proj-content">
+      <div class="proj-meta">
+        <span class="proj-domain">Data Engineering · Data Modeling</span>
+        <span class="proj-status"><span class="s-dot wip"></span>Planned</span>
+      </div>
+      <h2 class="proj-title">dbt Analytics Warehouse</h2>
+      <p class="proj-desc">Staging and mart models on the crypto warehouse, with data-quality tests and an auto-generated lineage graph published to GitHub Pages — the modern transformation layer, built the industry-standard way.</p>
+      <div class="proj-goal"><strong>Will demonstrate —</strong> dimensional modeling, dbt tests (not_null / unique / relationships), and a documented lineage graph.</div>
+      <div class="proj-footer">
+        <div class="proj-tools">
+          <span class="t-chip">dbt</span><span class="t-chip">SQL</span>
+          <span class="t-chip">DuckDB</span><span class="t-chip">GitHub Pages</span>
+        </div>
+        <div class="proj-links">
+          <span class="p-soon accent">Repo coming soon</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 11 -->
+  <article class="proj-item" id="de-airflow" data-tags="dataeng python">
+    <span class="proj-n">11</span>
+    <div class="proj-content">
+      <div class="proj-meta">
+        <span class="proj-domain">Data Engineering · Orchestration</span>
+        <span class="proj-status"><span class="s-dot wip"></span>Planned</span>
+      </div>
+      <h2 class="proj-title">Airflow Orchestrated Pipeline</h2>
+      <p class="proj-desc">A single DAG chaining extract → load → dbt run → dbt test with retries, failure alerting, and real dependency management — running locally on Docker to show orchestration beyond a lone cron job.</p>
+      <div class="proj-goal"><strong>Will demonstrate —</strong> DAG authoring, task dependencies and retries, and a production-deployment write-up.</div>
+      <div class="proj-footer">
+        <div class="proj-tools">
+          <span class="t-chip">Apache Airflow</span><span class="t-chip">Docker</span>
+          <span class="t-chip">Python</span>
+        </div>
+        <div class="proj-links">
+          <span class="p-soon accent">Repo coming soon</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 12 -->
+  <article class="proj-item" id="de-streaming" data-tags="dataeng python">
+    <span class="proj-n">12</span>
+    <div class="proj-content">
+      <div class="proj-meta">
+        <span class="proj-domain">Data Engineering · Streaming</span>
+        <span class="proj-status"><span class="s-dot wip"></span>Planned</span>
+      </div>
+      <h2 class="proj-title">Real-Time Streaming Pipeline</h2>
+      <p class="proj-desc">A Kafka-compatible producer and consumer streaming live market events into a sink, with rolling per-minute aggregations feeding a live, auto-refreshing Streamlit dashboard — data in motion, not just in batches.</p>
+      <div class="proj-goal"><strong>Will demonstrate —</strong> producer/consumer streaming, windowed aggregation, and a real-time serving layer.</div>
+      <div class="proj-footer">
+        <div class="proj-tools">
+          <span class="t-chip">Kafka (Redpanda)</span><span class="t-chip">Streamlit</span>
+          <span class="t-chip">Python</span><span class="t-chip">DuckDB</span>
+        </div>
+        <div class="proj-links">
+          <span class="p-soon accent">Repo coming soon</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 13 -->
+  <article class="proj-item" id="de-spark" data-tags="dataeng python">
+    <span class="proj-n">13</span>
+    <div class="proj-content">
+      <div class="proj-meta">
+        <span class="proj-domain">Data Engineering · Big Data</span>
+        <span class="proj-status"><span class="s-dot wip"></span>Planned</span>
+      </div>
+      <h2 class="proj-title">Spark Data Lake at Scale</h2>
+      <p class="proj-desc">PySpark processing 20M+ NYC taxi records into partitioned Parquet, with a CSV-vs-Parquet performance benchmark run on Databricks Community Edition — distributed compute and storage optimization at real scale.</p>
+      <div class="proj-goal"><strong>Will demonstrate —</strong> distributed processing, partitioning strategy, and columnar-format benchmarking.</div>
+      <div class="proj-footer">
+        <div class="proj-tools">
+          <span class="t-chip">PySpark</span><span class="t-chip">Parquet</span>
+          <span class="t-chip">Databricks CE</span>
+        </div>
+        <div class="proj-links">
+          <span class="p-soon accent">Repo coming soon</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
 </main>
 
 <p class="empty" id="empty">No projects match that filter yet.</p>
@@ -320,9 +450,10 @@
 
 <script src="assets/site.js"></script>
 <script>
-  const btns  = document.querySelectorAll('.f-btn');
-  const items = document.querySelectorAll('.proj-item');
-  const empty = document.getElementById('empty');
+  const btns    = document.querySelectorAll('.f-btn');
+  const items   = document.querySelectorAll('.proj-item');
+  const divider = document.querySelector('.track-divider');
+  const empty   = document.getElementById('empty');
 
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -335,6 +466,7 @@
         item.classList.toggle('hidden', !show);
         if (show) visible++;
       });
+      if (divider) divider.classList.toggle('hidden', !(f === 'all' || f === 'dataeng'));
       empty.classList.toggle('show', visible === 0);
     });
   });
