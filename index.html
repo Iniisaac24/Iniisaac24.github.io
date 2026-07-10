@@ -271,66 +271,36 @@
   <p class="section-label section-label--strong">Data engineering — in build</p>
   <p class="de-intro">A five-project track building the full pipeline stack — <b>batch → modeling → orchestration → streaming → scale</b> — end to end on entirely free, open tooling. Shipping one project at a time; check back as each goes live.</p>
 
-  <div class="proj-list">
+  <div class="work-grid">
 
-    <a class="proj-row" href="projects.html#de-etl">
-      <span class="proj-n">01</span>
-      <div>
-        <p class="proj-row-domain">Data Engineering · Batch ETL &nbsp;<span class="wip">Planned</span></p>
-        <p class="proj-row-title">Crypto Market ETL Pipeline</p>
-        <p class="proj-row-desc">A bronze → silver → gold pipeline pulling the CoinGecko API on a daily GitHub Actions schedule and landing clean, appended tables in DuckDB — scheduled ingestion and a medallion architecture, start to finish.</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">Python</span><span class="t-chip">DuckDB</span><span class="t-chip">GitHub Actions</span>
-      </div>
+    <a class="work-card" href="projects.html#de-etl">
+      <p class="work-cat">Data Engineering · Batch ETL</p>
+      <h3 class="work-title">Crypto Market ETL Pipeline. <span class="work-muted">Scheduled CoinGecko ingestion into a bronze → silver → gold DuckDB warehouse.</span></h3>
+      <span class="work-link">In build →</span>
     </a>
 
-    <a class="proj-row" href="projects.html#de-dbt">
-      <span class="proj-n">02</span>
-      <div>
-        <p class="proj-row-domain">Data Engineering · Data Modeling &nbsp;<span class="wip">Planned</span></p>
-        <p class="proj-row-title">dbt Analytics Warehouse</p>
-        <p class="proj-row-desc">Staging and mart models on the crypto warehouse, with data-quality tests and an auto-generated lineage graph published to GitHub Pages — the modern transformation layer done the industry-standard way.</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">dbt</span><span class="t-chip">SQL</span><span class="t-chip">DuckDB</span>
-      </div>
+    <a class="work-card" href="projects.html#de-dbt">
+      <p class="work-cat">Data Engineering · Data Modeling</p>
+      <h3 class="work-title">dbt Analytics Warehouse. <span class="work-muted">Staging and mart models with data-quality tests and a published lineage graph.</span></h3>
+      <span class="work-link">In build →</span>
     </a>
 
-    <a class="proj-row" href="projects.html#de-airflow">
-      <span class="proj-n">03</span>
-      <div>
-        <p class="proj-row-domain">Data Engineering · Orchestration &nbsp;<span class="wip">Planned</span></p>
-        <p class="proj-row-title">Airflow Orchestrated Pipeline</p>
-        <p class="proj-row-desc">A single DAG chaining extract → load → dbt run → dbt test with retries, alerting, and real dependency management — running locally on Docker to show orchestration beyond a lone cron job.</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">Apache Airflow</span><span class="t-chip">Docker</span><span class="t-chip">Python</span>
-      </div>
+    <a class="work-card" href="projects.html#de-airflow">
+      <p class="work-cat">Data Engineering · Orchestration</p>
+      <h3 class="work-title">Airflow Orchestrated Pipeline. <span class="work-muted">A DAG chaining extract → load → dbt run → test, with retries and alerting.</span></h3>
+      <span class="work-link">In build →</span>
     </a>
 
-    <a class="proj-row" href="projects.html#de-streaming">
-      <span class="proj-n">04</span>
-      <div>
-        <p class="proj-row-domain">Data Engineering · Streaming &nbsp;<span class="wip">Planned</span></p>
-        <p class="proj-row-title">Real-Time Streaming Pipeline</p>
-        <p class="proj-row-desc">A Kafka-compatible producer and consumer streaming live market events into a sink, with rolling per-minute aggregations feeding a live Streamlit dashboard — data in motion, not just in batches.</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">Kafka (Redpanda)</span><span class="t-chip">Streamlit</span><span class="t-chip">Python</span>
-      </div>
+    <a class="work-card" href="projects.html#de-streaming">
+      <p class="work-cat">Data Engineering · Streaming</p>
+      <h3 class="work-title">Real-Time Streaming Pipeline. <span class="work-muted">Kafka producer/consumer with windowed aggregations feeding a live dashboard.</span></h3>
+      <span class="work-link">In build →</span>
     </a>
 
-    <a class="proj-row" href="projects.html#de-spark">
-      <span class="proj-n">05</span>
-      <div>
-        <p class="proj-row-domain">Data Engineering · Big Data &nbsp;<span class="wip">Planned</span></p>
-        <p class="proj-row-title">Spark Data Lake at Scale</p>
-        <p class="proj-row-desc">PySpark processing 20M+ NYC taxi records into partitioned Parquet, with a CSV-vs-Parquet performance benchmark on Databricks Community Edition — distributed compute and storage optimization at real scale.</p>
-      </div>
-      <div class="proj-row-tools">
-        <span class="t-chip">PySpark</span><span class="t-chip">Parquet</span><span class="t-chip">Databricks CE</span>
-      </div>
+    <a class="work-card" href="projects.html#de-spark">
+      <p class="work-cat">Data Engineering · Big Data</p>
+      <h3 class="work-title">Spark Data Lake at Scale. <span class="work-muted">PySpark over 20M+ NYC taxi records into partitioned Parquet, benchmarked.</span></h3>
+      <span class="work-link">In build →</span>
     </a>
 
   </div>
