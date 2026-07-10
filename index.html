@@ -99,6 +99,10 @@
     .work-muted { color: var(--dim); font-weight: 400; }
     .work-link { font-size: 13px; font-weight: 500; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; }
     .work-card:hover .work-link { color: var(--accent); gap: 10px; }
+    .work-tag { align-self: flex-start; font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
+    .work-tag.analytics { background: rgba(255,90,31,.13); color: var(--accent); }
+    .work-tag.engineering { background: rgba(59,130,246,.15); color: #3b82f6; }
+    .see-all { margin-top: 40px; }
     .work-card.spotlight { background: #ffffff; border: 1px solid var(--line); margin-bottom: 44px; }
     .work-card.spotlight .work-cat { color: var(--accent); }
     .work-card.spotlight .work-title { color: #14130f; }
@@ -194,115 +198,40 @@
 
 <!-- SPOTLIGHT + PROJECTS -->
 <div class="section" id="projects">
-  <p class="section-label section-label--strong">Spotlight project</p>
-  <a class="work-card spotlight" href="Projects/churn.html">
-    <p class="work-cat">Telecom · Predictive Analytics</p>
-    <h3 class="sp-title">Customer Churn Prediction</h3>
-    <p class="sp-desc">XGBoost (AUC 0.84, 76% recall) identifies at-risk customers across 7,043 telecom records — the top churn drivers are contract type, tenure, and service tier. A SHAP explainability layer turns every prediction into a specific reason, so the retention team knows exactly who to target and why.</p>
-    <div class="sp-metrics">
-      <div><b>0.84</b><span>AUC-ROC</span></div>
-      <div><b>76%</b><span>Churn recall</span></div>
-      <div><b>7,043</b><span>Customers</span></div>
-      <div><b>~$52K</b><span>Projected saving</span></div>
-    </div>
-    <div class="sp-foot">
-      <div class="sp-tools">
-        <span class="t-chip">Python</span><span class="t-chip">XGBoost</span><span class="t-chip">SHAP</span><span class="t-chip">scikit-learn</span><span class="t-chip">pandas</span>
-      </div>
-      <span class="work-link">View project →</span>
-    </div>
-  </a>
-
   <div class="work-grid">
 
     <a class="work-card" href="Projects/churn.html">
+      <span class="work-tag analytics">Analytics</span>
       <p class="work-cat">Telecom · Predictive Analytics</p>
       <h3 class="work-title">Customer Churn Prediction. <span class="work-muted">XGBoost flags at-risk customers at 0.84 AUC and 76% recall.</span></h3>
       <span class="work-link">View project →</span>
     </a>
 
-    <a class="work-card" href="Projects/healthcare.html">
-      <p class="work-cat">Healthcare · Statistical Analysis</p>
-      <h3 class="work-title">Hospital Readmission Analysis. <span class="work-muted">What actually drives 30-day readmission across 101k encounters.</span></h3>
-      <span class="work-link">View project →</span>
-    </a>
-
     <a class="work-card" href="Projects/finance.html">
+      <span class="work-tag analytics">Analytics</span>
       <p class="work-cat">Finance · Risk Analytics</p>
       <h3 class="work-title">Investment Portfolio Risk Dashboard. <span class="work-muted">Sharpe 1.61 and a diversified book, from live market data.</span></h3>
       <span class="work-link">View project →</span>
     </a>
 
-    <a class="work-card" href="Projects/retail.html">
-      <p class="work-cat">Retail · Time Series</p>
-      <h3 class="work-title">Walmart Sales Forecasting. <span class="work-muted">LightGBM beats the baselines at 1.37% MAPE across 45 stores.</span></h3>
-      <span class="work-link">View project →</span>
-    </a>
-
-    <a class="work-card" href="Projects/hr.html">
-      <p class="work-cat">HR · People Analytics</p>
-      <h3 class="work-title">Employee Attrition Analysis. <span class="work-muted">Overtime and short tenure drive 55% attrition — flagged early.</span></h3>
-      <span class="work-link">View project →</span>
-    </a>
-
-    <a class="work-card" href="Projects/realestate.html">
-      <p class="work-cat">Real Estate · Geospatial</p>
-      <h3 class="work-title">Property Price Prediction &amp; Mapping. <span class="work-muted">XGBoost at R² 0.91 maps where the market is mispriced.</span></h3>
-      <span class="work-link">View project →</span>
-    </a>
-
-    <a class="work-card" href="Projects/sql.html">
-      <p class="work-cat">E-commerce · SQL · BI</p>
-      <h3 class="work-title">Olist Retail BI with SQL. <span class="work-muted">Eight business queries across an 8-table relational schema.</span></h3>
-      <span class="work-link">View project →</span>
-    </a>
-
-    <a class="work-card" href="Projects/abtesting.html">
-      <p class="work-cat">Marketing · A/B Testing</p>
-      <h3 class="work-title">Checkout A/B Test &amp; Attribution. <span class="work-muted">A rigorous test on 294k users — an honest negative result.</span></h3>
-      <span class="work-link">View project →</span>
-    </a>
-
-  </div>
-</div>
-
-<!-- DATA ENGINEERING -->
-<div class="section" id="dataeng">
-  <p class="section-label section-label--strong">Data engineering — in build</p>
-  <p class="de-intro">A five-project track building the full pipeline stack — <b>batch → modeling → orchestration → streaming → scale</b> — end to end on entirely free, open tooling. Shipping one project at a time; check back as each goes live.</p>
-
-  <div class="work-grid">
-
     <a class="work-card" href="projects.html#de-etl">
+      <span class="work-tag engineering">Engineering</span>
       <p class="work-cat">Data Engineering · Batch ETL</p>
       <h3 class="work-title">Crypto Market ETL Pipeline. <span class="work-muted">Scheduled CoinGecko ingestion into a bronze → silver → gold DuckDB warehouse.</span></h3>
       <span class="work-link">In build →</span>
     </a>
 
-    <a class="work-card" href="projects.html#de-dbt">
-      <p class="work-cat">Data Engineering · Data Modeling</p>
-      <h3 class="work-title">dbt Analytics Warehouse. <span class="work-muted">Staging and mart models with data-quality tests and a published lineage graph.</span></h3>
-      <span class="work-link">In build →</span>
-    </a>
-
-    <a class="work-card" href="projects.html#de-airflow">
-      <p class="work-cat">Data Engineering · Orchestration</p>
-      <h3 class="work-title">Airflow Orchestrated Pipeline. <span class="work-muted">A DAG chaining extract → load → dbt run → test, with retries and alerting.</span></h3>
-      <span class="work-link">In build →</span>
-    </a>
-
-    <a class="work-card" href="projects.html#de-streaming">
-      <p class="work-cat">Data Engineering · Streaming</p>
-      <h3 class="work-title">Real-Time Streaming Pipeline. <span class="work-muted">Kafka producer/consumer with windowed aggregations feeding a live dashboard.</span></h3>
-      <span class="work-link">In build →</span>
-    </a>
-
     <a class="work-card" href="projects.html#de-spark">
+      <span class="work-tag engineering">Engineering</span>
       <p class="work-cat">Data Engineering · Big Data</p>
       <h3 class="work-title">Spark Data Lake at Scale. <span class="work-muted">PySpark over 20M+ NYC taxi records into partitioned Parquet, benchmarked.</span></h3>
       <span class="work-link">In build →</span>
     </a>
 
+  </div>
+
+  <div class="see-all">
+    <a href="projects.html" class="hl-primary">See all projects</a>
   </div>
 </div>
 
