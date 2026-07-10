@@ -20,11 +20,14 @@
     .f-btn { font-size: 12px; font-weight: 400; color: var(--mid); background: none; border: none; padding: 4px 0; margin-right: 6px; cursor: pointer; border-bottom: 1.5px solid transparent; transition: color .15s, border-color .15s; font-family: 'Geist', sans-serif; }
     .f-btn:hover { color: var(--ink); }
     .f-btn.on { color: var(--ink); border-bottom-color: var(--ink); }
+    .f-btn--de { font-weight: 700; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; margin-left: 6px; }
+    .f-btn--de::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .f-btn--de:hover { color: var(--accent); opacity: .75; }
+    .f-btn--de.on { color: var(--accent); border-bottom-color: var(--accent); }
 
-    .proj-list { max-width: 75vw; margin: 0 auto; padding: 0 40px 80px; }
+    .proj-list { max-width: 75vw; margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; align-items: stretch; }
     .proj-item { display: grid; grid-template-columns: 36px 1fr; gap: 28px; padding: 40px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; position: relative; }
     .proj-cover { position: absolute; inset: 0; z-index: 1; }
-    .proj-item:first-child { border-top: 1px solid var(--line); margin-top: 8px; }
     .proj-item.hidden { display: none; }
     .proj-n { font-size: 11px; font-weight: 400; color: var(--dim); padding-top: 4px; }
     .proj-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
@@ -72,6 +75,7 @@
 
     @media (max-width: 900px) {
       .page-header, .filter-row, .proj-list, .contact-strip { padding-left: 20px; padding-right: 20px; }
+      .proj-list { grid-template-columns: 1fr; column-gap: 0; }
       .proj-item { grid-template-columns: 1fr; gap: 10px; }
       .proj-n { display: none; }
       .proj-footer { flex-direction: column; align-items: flex-start; gap: 14px; }
@@ -104,7 +108,7 @@
   <button class="f-btn" data-filter="ml">Machine Learning</button>
   <button class="f-btn" data-filter="dashboard">Dashboard</button>
   <button class="f-btn" data-filter="timeseries">Time Series</button>
-  <button class="f-btn" data-filter="dataeng">Data Engineering</button>
+  <button class="f-btn f-btn--de" data-filter="dataeng">Data Engineering</button>
 </div>
 
 <!-- PROJECTS -->
